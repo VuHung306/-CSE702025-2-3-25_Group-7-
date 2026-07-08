@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLibrary | Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+  <body>
+    <!-- Shared navbar -->
+    <header class="site-header">
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">S</span>
+          <span>SmartLibrary</span>
+        </a>
+
+        <button class="mobile-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="../index.html">Trang chủ</a></li>
+          <li><a href="books.html">Sách</a></li>
+          <li><a href="borrow.html">Mượn</a></li>
+          <li><a href="return.html">Trả</a></li>
+          <li><a href="profile.html">Hồ sơ</a></li>
+        </ul>
+
+        <a class="nav-cta" href="login.html">Đăng nhập</a>
+      </nav>
+    </header>
+
+    <main class="admin-page">
+      <section class="admin-shell" aria-label="Admin dashboard">
+        <aside class="admin-sidebar" aria-label="Sidebar quản trị">
+          <h2>Admin Panel</h2>
+          <nav class="sidebar-nav">
+            <a href="#dashboard" class="active">Dashboard</a>
+            <a href="#books-section">Books</a>
+            <a href="#categories-section">Categories</a>
+            <a href="#users-section">Users</a>
+            <a href="#borrow-section">Borrow Records</a>
+            <a href="#return-section">Return Records</a>
+            <a href="#reports-section">Reports</a>
+            <a href="#settings-section">Settings</a>
+            <a href="#logout">Logout</a>
+          </nav>
+        </aside>
+
+        <div class="admin-content">
+          <section class="page-header" id="dashboard">
+            <div>
+              <p class="eyebrow">Admin Dashboard</p>
+              <h1>Library Overview</h1>
+            </div>
+            <div class="header-actions">
+              <input id="book-search" type="search" placeholder="Search books" />
+              <input id="user-search" type="search" placeholder="Search users" />
+            </div>
+          </section>
+
+          <section class="stats-grid" aria-label="Dashboard statistics">
+            <article class="stat-card">
+              <h3 id="total-books">0</h3>
+              <p>Total Books</p>
+            </article>
+            <article class="stat-card">
+              <h3 id="available-books">0</h3>
+              <p>Available Books</p>
+            </article>
+            <article class="stat-card">
+              <h3 id="borrowed-books">0</h3>
+              <p>Borrowed Books</p>
+            </article>
+            <article class="stat-card">
+              <h3 id="total-users">0</h3>
+              <p>Total Users</p>
+            </article>
+            <article class="stat-card">
+              <h3 id="active-borrows">0</h3>
+              <p>Active Borrow Records</p>
+            </article>
+          </section>
+
+          <section class="content-card" aria-labelledby="borrow-records-title">
+            <div class="section-heading">
+              <h2 id="borrow-records-title">Recent Borrow Records</h2>
+              <select id="borrow-status-filter">
+                <option value="all">All Status</option>
+                <option value="Active">Active</option>
+                <option value="Overdue">Overdue</option>
+                <option value="Returned">Returned</option>
+              </select>
+            </div>
+            <div class="table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">Book Title</th>
+                    <th scope="col">Borrow Date</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="borrow-records-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="content-card" id="books-section" aria-labelledby="books-title">
+            <div class="section-heading">
+              <h2 id="books-title">Book Management</h2>
+              <p>Manage library inventory</p>
+            </div>
+            <div class="table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Cover</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="books-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="content-card" id="users-section" aria-labelledby="users-title">
+            <div class="section-heading">
+              <h2 id="users-title">User Management</h2>
+              <p>Manage registered students</p>
+            </div>
+            <div class="table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="users-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="content-card" id="reports-section" aria-labelledby="reports-title">
+            <div class="section-heading">
+              <h2 id="reports-title">Reports</h2>
+              <p>Quick summary of library health</p>
+            </div>
+            <div class="report-grid">
+              <article class="report-card">
+                <h3 id="most-borrowed">0</h3>
+                <p>Most Borrowed Books</p>
+              </article>
+              <article class="report-card">
+                <h3 id="active-users">0</h3>
+                <p>Active Users</p>
+              </article>
+              <article class="report-card">
+                <h3 id="overdue-books">0</h3>
+                <p>Overdue Books</p>
+              </article>
+              <article class="report-card">
+                <h3 id="books-added-month">0</h3>
+                <p>Books Added This Month</p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <!-- Shared footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-column footer-about">
+          <a class="brand footer-brand" href="../index.html">
+            <span class="brand-mark">S</span>
+            <span>SmartLibrary</span>
+          </a>
+          <p>SmartLibrary helps students discover, borrow, and manage books smoothly.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="borrow.html">Borrow</a></li>
+            <li><a href="profile.html">Profile</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact</h3>
+          <ul>
+            <li>Email: support@smartlibrary.vn</li>
+            <li>Phone: 0123 456 789</li>
+            <li>Address: Hanoi, Vietnam</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 SmartLibrary. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="modal-backdrop" id="delete-modal" style="display:none;" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+        <h3 id="delete-modal-title">Confirm Delete</h3>
+        <p id="delete-modal-message">Are you sure you want to delete this item?</p>
+        <div class="modal-actions">
+          <button class="modal-cancel-btn" id="cancel-delete" type="button">Cancel</button>
+          <button class="modal-submit-btn" id="confirm-delete" type="button">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/admin.js"></script>
+  </body>
+</html>

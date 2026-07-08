@@ -1,0 +1,261 @@
+/* Page-specific styles for the User Profile page */
+
+.profile-page {
+  padding: 2rem 0 3rem;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 320px) 1fr;
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.profile-sidebar,
+.profile-content {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+  overflow: hidden;
+}
+
+.profile-sidebar {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, var(--primary-color), #60a5fa);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.profile-sidebar h1 {
+  font-size: 1.3rem;
+  margin-bottom: 0.25rem;
+}
+
+.profile-sidebar p {
+  color: var(--muted-color);
+  margin-bottom: 1rem;
+}
+
+.profile-details {
+  display: grid;
+  gap: 0.7rem;
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.profile-detail-item {
+  padding: 0.7rem 0.8rem;
+  border-radius: 14px;
+  background: var(--light-bg);
+}
+
+.profile-detail-item strong {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted-color);
+  margin-bottom: 0.2rem;
+}
+
+.edit-profile-btn,
+.modal-submit-btn,
+.modal-cancel-btn {
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.edit-profile-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.profile-content {
+  padding: 1.4rem;
+}
+
+.content-section {
+  margin-bottom: 1.4rem;
+}
+
+.content-section h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.9rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.info-card {
+  background: var(--light-bg);
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.info-card strong {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted-color);
+  margin-bottom: 0.25rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.profile-table th,
+.profile-table td {
+  text-align: left;
+  padding: 0.8rem 0.6rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.book-cover {
+  width: 46px;
+  height: 56px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-color), #bfdbfe);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.status-badge.on-time {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.overdue {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-badge.completed {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.profile-message {
+  margin-top: 0.8rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 2000;
+}
+
+.modal-card {
+  width: min(520px, 100%);
+  background: var(--white);
+  border-radius: 24px;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.modal-card h3 {
+  margin-bottom: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group input {
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.modal-submit-btn {
+  padding: 0.75rem 1rem;
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.modal-cancel-btn {
+  padding: 0.75rem 1rem;
+  background: var(--light-bg);
+  color: var(--text-color);
+}
+
+.error-text {
+  color: #b91c1c;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .info-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-page {
+    padding-top: 1.25rem;
+  }
+}

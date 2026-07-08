@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLibrary | Return Books</title>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/return.css" />
+  </head>
+  <body>
+    <!-- Navbar reused from the existing layout -->
+    <header class="site-header">
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">S</span>
+          <span>SmartLibrary</span>
+        </a>
+
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-label="Mở menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="../index.html">Trang chủ</a></li>
+          <li><a href="books.html">Sách</a></li>
+          <li><a href="borrow.html">Mượn</a></li>
+          <li><a href="return.html">Trả</a></li>
+          <li><a href="profile.html">Hồ sơ</a></li>
+        </ul>
+
+        <a class="nav-cta" href="login.html">Đăng nhập</a>
+      </nav>
+    </header>
+
+    <main class="return-page">
+      <section class="return-header" aria-labelledby="return-title">
+        <p class="eyebrow">Quy trình trả sách</p>
+        <h1 id="return-title">Return Books</h1>
+        <p>Theo dõi các cuốn sách bạn đang mượn và xác nhận việc trả sách.</p>
+      </section>
+
+      <section class="summary-grid" aria-label="Tóm tắt tình trạng sách">
+        <article class="summary-card">
+          <h2 id="total-borrowed">0</h2>
+          <p>Tổng số sách đang mượn</p>
+        </article>
+        <article class="summary-card">
+          <h2 id="total-overdue">0</h2>
+          <p>Số sách quá hạn</p>
+        </article>
+      </section>
+
+      <section class="return-list-card" aria-labelledby="return-list-title">
+        <h2 id="return-list-title">Danh sách sách đã mượn</h2>
+        <div class="table-wrapper">
+          <table class="return-table">
+            <thead>
+              <tr>
+                <th scope="col">Bìa</th>
+                <th scope="col">Tiêu đề</th>
+                <th scope="col">Ngày mượn</th>
+                <th scope="col">Hạn trả</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Trả</th>
+              </tr>
+            </thead>
+            <tbody id="borrowed-list"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer reused from the existing layout -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-column footer-about">
+          <a class="brand footer-brand" href="../index.html">
+            <span class="brand-mark">S</span>
+            <span>SmartLibrary</span>
+          </a>
+          <p>
+            SmartLibrary là một nền tảng thư viện trực tuyến giúp bạn khám phá,
+            mượn và quản lý sách một cách dễ dàng.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên kết nhanh</h3>
+          <ul>
+            <li><a href="../index.html">Trang chủ</a></li>
+            <li><a href="books.html">Danh mục sách</a></li>
+            <li><a href="borrow.html">Mượn sách</a></li>
+            <li><a href="profile.html">Hồ sơ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>Email:24100109@st.phenikaa-uni.edu.vn</li>
+            <li>Điện thoại: 0862317764</li>
+            <li>Địa chỉ: Hà Đông, Hà Nội, Việt Nam</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Theo dõi</h3>
+          <div class="social-links" aria-label="Mạng xã hội">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">i</a>
+            <a href="#" aria-label="Twitter">t</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 SmartLibrary. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/return.js"></script>
+  </body>
+</html>

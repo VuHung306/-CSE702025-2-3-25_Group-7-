@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLibrary | Trang chủ</title>
+    <link rel="stylesheet" href="css/home.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">S</span>
+          <span>SmartLibrary</span>
+        </a>
+
+        <button class="mobile-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="pages/books.html">Sách</a></li>
+          <li><a href="pages/borrow.html">Mượn</a></li>
+          <li><a href="pages/return.html">Trả</a></li>
+          <li><a href="pages/profile.html">Hồ sơ</a></li>
+        </ul>
+
+        <a class="nav-cta" href="pages/login.html">Đăng nhập</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Thư viện thông minh</p>
+          <h1>Khám phá, mượn và quản lý sách dễ dàng</h1>
+          <p>SmartLibrary mang đến trải nghiệm thư viện hiện đại cho sinh viên với giao diện đơn giản, trực quan và thân thiện.</p>
+          <form class="search-bar">
+            <label class="sr-only" for="home-search">Tìm kiếm sách</label>
+            <input id="home-search" type="search" placeholder="Tìm tên sách, tác giả..." />
+            <button type="submit">Tìm kiếm</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="categories" aria-labelledby="categories-title">
+        <div class="section-heading">
+          <h2 id="categories-title">Danh mục nổi bật</h2>
+          <p>Khám phá các lĩnh vực yêu thích của bạn.</p>
+        </div>
+        <div class="card-grid">
+          <article class="category-card">
+            <h3>Technology</h3>
+            <p>Công nghệ và lập trình</p>
+          </article>
+          <article class="category-card">
+            <h3>Literature</h3>
+            <p>Văn học và tiểu thuyết</p>
+          </article>
+          <article class="category-card">
+            <h3>Economics</h3>
+            <p>Kinh tế và quản lý</p>
+          </article>
+          <article class="category-card">
+            <h3>Science</h3>
+            <p>Khoa học và khám phá</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="featured-books" aria-labelledby="featured-title">
+        <div class="section-heading">
+          <h2 id="featured-title">Sách nổi bật</h2>
+          <p>Những cuốn sách được nhiều người quan tâm nhất.</p>
+        </div>
+        <div class="book-grid">
+          <article class="book-card">
+            <div class="book-cover" aria-hidden="true"></div>
+            <h3>Clean Code</h3>
+            <p class="meta">Robert C. Martin · Programming</p>
+            <div class="book-actions">
+              <a href="pages/book-detail.html">Xem chi tiết</a>
+            </div>
+          </article>
+          <article class="book-card">
+            <div class="book-cover" aria-hidden="true"></div>
+            <h3>The Hobbit</h3>
+            <p class="meta">J.R.R. Tolkien · Fantasy</p>
+            <div class="book-actions">
+              <a href="pages/book-detail.html">Xem chi tiết</a>
+            </div>
+          </article>
+          <article class="book-card">
+            <div class="book-cover" aria-hidden="true"></div>
+            <h3>Atomic Habits</h3>
+            <p class="meta">James Clear · Self-Help</p>
+            <div class="book-actions">
+              <a href="pages/book-detail.html">Xem chi tiết</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="statistics" aria-labelledby="stats-title">
+        <div class="section-heading">
+          <h2 id="stats-title">Thống kê thư viện</h2>
+          <p>Biểu đồ và số liệu đơn giản về hoạt động.</p>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card">
+            <h3>1200+</h3>
+            <p>Sách trong thư viện</p>
+          </article>
+          <article class="stat-card">
+            <h3>350+</h3>
+            <p>Người dùng đăng ký</p>
+          </article>
+          <article class="stat-card">
+            <h3>86%</h3>
+            <p>Tỷ lệ sách được mượn</p>
+          </article>
+          <article class="stat-card">
+            <h3>24/7</h3>
+            <p>Truy cập mọi lúc</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-column footer-about">
+          <a class="brand footer-brand" href="index.html">
+            <span class="brand-mark">S</span>
+            <span>SmartLibrary</span>
+          </a>
+          <p>SmartLibrary là nền tảng thư viện trực tuyến giúp bạn dễ dàng tìm sách, theo dõi và quản lý hoạt động mượn trả.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Liên kết nhanh</h3>
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="pages/books.html">Danh mục sách</a></li>
+            <li><a href="pages/borrow.html">Mượn sách</a></li>
+            <li><a href="pages/profile.html">Hồ sơ</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>Email:24100109@st.phenikaa-uni.edu.vn</li>
+            <li>Điện thoại: 0862317764</li>
+            <li>Địa chỉ: Hà Đông, Hà Nội, Việt Nam</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Theo dõi</h3>
+          <div class="social-links" aria-label="Mạng xã hội">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">i</a>
+            <a href="#" aria-label="Twitter">t</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 SmartLibrary. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

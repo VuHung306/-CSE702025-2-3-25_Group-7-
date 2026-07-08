@@ -1,0 +1,122 @@
+/* Page-specific styles for the Register page */
+
+.register-page {
+  width: min(1200px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0;
+  display: grid;
+  place-items: center;
+}
+
+.register-card {
+  width: min(560px, 100%);
+  background: var(--white);
+  border-radius: 24px;
+  box-shadow: 0 12px 35px rgba(37, 99, 235, 0.12);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+}
+
+.register-card-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.register-card-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.register-card-header p {
+  color: var(--muted-color);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  outline: none;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.error-message {
+  min-height: 1rem;
+  margin-top: 0.35rem;
+  color: #dc2626;
+  font-size: 0.9rem;
+}
+
+.register-submit {
+  width: 100%;
+  border: none;
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.register-submit:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.form-message {
+  margin-top: 1rem;
+  min-height: 1.2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1.2rem;
+  color: var(--muted-color);
+}
+
+.login-link a {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .register-card {
+    padding: 1.4rem;
+  }
+}

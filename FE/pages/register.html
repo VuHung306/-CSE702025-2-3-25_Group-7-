@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLibrary | Đăng ký</title>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/register.css" />
+  </head>
+  <body>
+    <!-- Navbar reused from the existing layout -->
+    <header class="site-header">
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">S</span>
+          <span>SmartLibrary</span>
+        </a>
+
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-label="Mở menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="../index.html">Trang chủ</a></li>
+          <li><a href="books.html">Sách</a></li>
+          <li><a href="borrow.html">Mượn</a></li>
+          <li><a href="return.html">Trả</a></li>
+          <li><a href="profile.html">Hồ sơ</a></li>
+        </ul>
+
+        <a class="nav-cta" href="login.html">Đăng nhập</a>
+      </nav>
+    </header>
+
+    <main class="register-page">
+      <section class="register-card" aria-labelledby="register-title">
+        <div class="register-card-header">
+          <p class="eyebrow">Tạo tài khoản mới</p>
+          <h1 id="register-title">Đăng ký</h1>
+          <p>Tham gia SmartLibrary để mượn sách và quản lý tài khoản dễ dàng.</p>
+        </div>
+
+        <form id="register-form" novalidate>
+          <div class="form-group">
+            <label for="full-name">Họ và tên</label>
+            <input id="full-name" name="fullName" type="text" placeholder="Nhập họ và tên" />
+            <p class="error-message" id="full-name-error"></p>
+          </div>
+
+          <div class="form-group">
+            <label for="student-id">Mã sinh viên</label>
+            <input id="student-id" name="studentId" type="text" placeholder="Nhập mã sinh viên" />
+            <p class="error-message" id="student-id-error"></p>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Nhập email" />
+            <p class="error-message" id="email-error"></p>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Số điện thoại</label>
+            <input id="phone" name="phone" type="tel" placeholder="Nhập số điện thoại" />
+            <p class="error-message" id="phone-error"></p>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <div class="password-wrapper">
+              <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" />
+              <button type="button" class="toggle-password" id="toggle-password" aria-label="Hiện mật khẩu">Hiện</button>
+            </div>
+            <p class="error-message" id="password-error"></p>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">Xác nhận mật khẩu</label>
+            <div class="password-wrapper">
+              <input id="confirm-password" name="confirmPassword" type="password" placeholder="Nhập lại mật khẩu" />
+              <button type="button" class="toggle-password" id="toggle-confirm-password" aria-label="Hiện mật khẩu xác nhận">Hiện</button>
+            </div>
+            <p class="error-message" id="confirm-password-error"></p>
+          </div>
+
+          <button class="register-submit" type="submit">Đăng ký</button>
+          <p class="form-message" id="form-message" aria-live="polite"></p>
+        </form>
+
+        <p class="login-link">
+          Đã có tài khoản?
+          <a href="login.html">Quay lại đăng nhập</a>
+        </p>
+      </section>
+    </main>
+
+    <!-- Footer reused from the existing layout -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-column footer-about">
+          <a class="brand footer-brand" href="../index.html">
+            <span class="brand-mark">S</span>
+            <span>SmartLibrary</span>
+          </a>
+          <p>
+            SmartLibrary là một nền tảng thư viện trực tuyến giúp bạn khám phá,
+            mượn và quản lý sách một cách dễ dàng.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên kết nhanh</h3>
+          <ul>
+            <li><a href="../index.html">Trang chủ</a></li>
+            <li><a href="books.html">Danh mục sách</a></li>
+            <li><a href="borrow.html">Mượn sách</a></li>
+            <li><a href="profile.html">Hồ sơ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>Email: support@smartlibrary.vn</li>
+            <li>Điện thoại: 0123 456 789</li>
+            <li>Địa chỉ: Hà Nội, Việt Nam</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Theo dõi</h3>
+          <div class="social-links" aria-label="Mạng xã hội">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">i</a>
+            <a href="#" aria-label="Twitter">t</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 SmartLibrary. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/register.js"></script>
+  </body>
+</html>

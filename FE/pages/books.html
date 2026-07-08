@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLibrary | Library Books</title>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/books.css" />
+  </head>
+  <body>
+    <!-- Navbar reused from the home page -->
+    <header class="site-header">
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">S</span>
+          <span>SmartLibrary</span>
+        </a>
+
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-label="Mở menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="../index.html">Trang chủ</a></li>
+          <li><a href="books.html">Sách</a></li>
+          <li><a href="borrow.html">Mượn</a></li>
+          <li><a href="return.html">Trả</a></li>
+          <li><a href="profile.html">Hồ sơ</a></li>
+        </ul>
+
+        <a class="nav-cta" href="login.html">Đăng nhập</a>
+      </nav>
+    </header>
+
+    <main class="books-page">
+      <!-- Page intro -->
+      <section class="books-hero" aria-labelledby="books-title">
+        <div class="books-hero-content">
+          <p class="eyebrow">Thư viện số</p>
+          <h1 id="books-title">Library Books</h1>
+          <p>Khám phá kho sách đa dạng và tìm cuốn phù hợp nhất cho bạn.</p>
+        </div>
+      </section>
+
+      <!-- Search and filter controls -->
+      <section class="books-controls" aria-label="Tìm kiếm và lọc sách">
+        <form class="books-search-form" id="search-form">
+          <label class="sr-only" for="book-search">Tìm kiếm sách</label>
+          <input id="book-search" type="search" placeholder="Tìm theo tên sách" />
+          <button type="submit">Tìm</button>
+        </form>
+
+        <div class="books-filters">
+          <label class="sr-only" for="category-filter">Lọc theo thể loại</label>
+          <select id="category-filter">
+            <option value="all">Tất cả thể loại</option>
+            <option value="Technology">Công Nghệ</option>
+            <option value="Literature">Văn Học</option>
+            <option value="Economics">Kinh Tế</option>
+            <option value="Foreign Languages">Ngoại Ngữ</option>
+            <option value="Science">Khoa Học</option>
+            <option value="Life Skills">Kỹ Năng Sống</option>
+          </select>
+
+          <label class="sr-only" for="sort-select">Sắp xếp</label>
+          <select id="sort-select">
+            <option value="title">Sắp xếp: Tiêu đề</option>
+            <option value="author">Sắp xếp: Tác giả</option>
+            <option value="category">Sắp xếp: Thể loại</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Book collection -->
+      <section aria-labelledby="books-grid-title">
+        <h2 id="books-grid-title" class="sr-only">Danh sách sách</h2>
+        <div class="book-grid" id="books-grid"></div>
+      </section>
+
+      <!-- Pagination -->
+      <nav class="pagination" aria-label="Phân trang sách" id="pagination"></nav>
+    </main>
+
+    <!-- Footer reused from the home page -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-column footer-about">
+          <a class="brand footer-brand" href="../index.html">
+            <span class="brand-mark">S</span>
+            <span>SmartLibrary</span>
+          </a>
+          <p>
+            SmartLibrary là một nền tảng thư viện trực tuyến giúp bạn khám phá,
+            mượn và quản lý sách một cách dễ dàng.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên kết nhanh</h3>
+          <ul>
+            <li><a href="../index.html">Trang chủ</a></li>
+            <li><a href="books.html">Danh mục sách</a></li>
+            <li><a href="borrow.html">Mượn sách</a></li>
+            <li><a href="profile.html">Hồ sơ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>Email: support@smartlibrary.vn</li>
+            <li>Điện thoại: 0123 456 789</li>
+            <li>Địa chỉ: Hà Nội, Việt Nam</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Theo dõi</h3>
+          <div class="social-links" aria-label="Mạng xã hội">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">i</a>
+            <a href="#" aria-label="Twitter">t</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 SmartLibrary. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/books.js"></script>
+  </body>
+</html>

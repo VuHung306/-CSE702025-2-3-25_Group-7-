@@ -1,0 +1,106 @@
+/* Page-specific styles for the Return page */
+
+.return-page {
+  width: min(1200px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.return-header {
+  margin-bottom: 1.4rem;
+}
+
+.return-header h1 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-bottom: 0.4rem;
+}
+
+.return-header p {
+  color: var(--muted-color);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.summary-card,
+.return-list-card {
+  background: var(--white);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+  border: 1px solid var(--border-color);
+  padding: 1.3rem;
+}
+
+.summary-card h2 {
+  color: var(--primary-color);
+  font-size: 1.7rem;
+  margin-bottom: 0.25rem;
+}
+
+.summary-card p {
+  color: var(--muted-color);
+}
+
+.return-list-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.return-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.return-table th,
+.return-table td {
+  text-align: left;
+  padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.return-cover {
+  width: 48px;
+  height: 60px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-color), #bfdbfe);
+}
+
+.return-btn {
+  border: none;
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.status-on-time {
+  color: #166534;
+  font-weight: 600;
+}
+
+.status-overdue {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted-color);
+  padding: 1rem 0;
+}
+
+@media (max-width: 700px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

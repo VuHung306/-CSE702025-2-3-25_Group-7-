@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLibrary | User Profile</title>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+  </head>
+  <body>
+    <!-- Navbar reused from the existing layout -->
+    <header class="site-header">
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">S</span>
+          <span>SmartLibrary</span>
+        </a>
+
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-label="Mở menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="../index.html">Trang chủ</a></li>
+          <li><a href="books.html">Sách</a></li>
+          <li><a href="borrow.html">Mượn</a></li>
+          <li><a href="return.html">Trả</a></li>
+          <li><a href="profile.html">Hồ sơ</a></li>
+        </ul>
+
+        <a class="nav-cta" href="login.html">Đăng nhập</a>
+      </nav>
+    </header>
+
+    <main class="profile-page">
+      <section class="profile-grid" aria-label="Thông tin người dùng">
+        <aside class="profile-sidebar" aria-labelledby="profile-sidebar-title">
+          <div class="profile-avatar" aria-hidden="true">A</div>
+          <h1 id="sidebar-name">Nguyễn Văn An</h1>
+          <p>Student</p>
+
+          <div class="profile-details">
+            <div class="profile-detail-item">
+              <strong>Student ID</strong>
+              <span id="sidebar-student">20240001</span>
+            </div>
+            <div class="profile-detail-item">
+              <strong>Email</strong>
+              <span id="sidebar-email">an.nguyen@student.edu.vn</span>
+            </div>
+            <div class="profile-detail-item">
+              <strong>Phone</strong>
+              <span id="sidebar-phone">0901234567</span>
+            </div>
+          </div>
+
+          <button class="edit-profile-btn" id="edit-profile-btn" type="button">Edit Profile</button>
+        </aside>
+
+        <div class="profile-content">
+          <section class="content-section" aria-labelledby="info-title">
+            <h2 id="info-title">Personal Information</h2>
+            <div class="info-grid">
+              <div class="info-card">
+                <strong>Full Name</strong>
+                <span id="profile-full-name">Nguyễn Văn An</span>
+              </div>
+              <div class="info-card">
+                <strong>Student ID</strong>
+                <span id="profile-student-id">20240001</span>
+              </div>
+              <div class="info-card">
+                <strong>Email</strong>
+                <span id="profile-email">an.nguyen@student.edu.vn</span>
+              </div>
+              <div class="info-card">
+                <strong>Phone Number</strong>
+                <span id="profile-phone">0901234567</span>
+              </div>
+              <div class="info-card">
+                <strong>Faculty</strong>
+                <span id="profile-faculty">Công nghệ thông tin</span>
+              </div>
+              <div class="info-card">
+                <strong>Class</strong>
+                <span id="profile-class">KTPM-K16</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="content-section" aria-labelledby="borrowed-title">
+            <h2 id="borrowed-title">Current Borrowed Books</h2>
+            <div class="table-wrapper">
+              <table class="profile-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Book Cover</th>
+                    <th scope="col">Book Title</th>
+                    <th scope="col">Borrow Date</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="borrowed-books-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="content-section" aria-labelledby="history-title">
+            <h2 id="history-title">Borrow History</h2>
+            <div class="table-wrapper">
+              <table class="profile-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Book Title</th>
+                    <th scope="col">Borrow Date</th>
+                    <th scope="col">Return Date</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="borrow-history-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <p class="profile-message" id="profile-message" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer reused from the existing layout -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-column footer-about">
+          <a class="brand footer-brand" href="../index.html">
+            <span class="brand-mark">S</span>
+            <span>SmartLibrary</span>
+          </a>
+          <p>
+            SmartLibrary là một nền tảng thư viện trực tuyến giúp bạn khám phá,
+            mượn và quản lý sách một cách dễ dàng.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên kết nhanh</h3>
+          <ul>
+            <li><a href="../index.html">Trang chủ</a></li>
+            <li><a href="books.html">Danh mục sách</a></li>
+            <li><a href="borrow.html">Mượn sách</a></li>
+            <li><a href="profile.html">Hồ sơ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>Email: support@smartlibrary.vn</li>
+            <li>Điện thoại: 0123 456 789</li>
+            <li>Địa chỉ: Hà Nội, Việt Nam</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Theo dõi</h3>
+          <div class="social-links" aria-label="Mạng xã hội">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">i</a>
+            <a href="#" aria-label="Twitter">t</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 SmartLibrary. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </footer>
+
+    <div class="modal-backdrop" id="edit-profile-modal" style="display: none;" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="edit-profile-title">
+        <h3 id="edit-profile-title">Edit Profile</h3>
+        <form id="profile-edit-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="edit-full-name">Full Name</label>
+              <input id="edit-full-name" name="fullName" type="text" />
+            </div>
+            <div class="form-group">
+              <label for="edit-student-id">Student ID</label>
+              <input id="edit-student-id" name="studentId" type="text" />
+            </div>
+            <div class="form-group">
+              <label for="edit-email">Email</label>
+              <input id="edit-email" name="email" type="email" />
+            </div>
+            <div class="form-group">
+              <label for="edit-phone">Phone Number</label>
+              <input id="edit-phone" name="phone" type="tel" />
+            </div>
+            <div class="form-group">
+              <label for="edit-faculty">Faculty</label>
+              <input id="edit-faculty" name="faculty" type="text" />
+            </div>
+            <div class="form-group">
+              <label for="edit-class">Class</label>
+              <input id="edit-class" name="className" type="text" />
+            </div>
+          </div>
+          <p class="error-text" id="profile-form-error"></p>
+          <div class="modal-actions">
+            <button class="modal-cancel-btn" id="modal-cancel" type="button">Cancel</button>
+            <button class="modal-submit-btn" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/profile.js"></script>
+  </body>
+</html>

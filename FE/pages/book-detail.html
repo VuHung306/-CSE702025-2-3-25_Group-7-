@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLibrary | Chi tiết sách</title>
+    <link rel="stylesheet" href="../css/home.css" />
+    <link rel="stylesheet" href="../css/book-detail.css" />
+  </head>
+  <body>
+    <!-- Navbar reused from the existing layout -->
+    <header class="site-header">
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark">S</span>
+          <span>SmartLibrary</span>
+        </a>
+
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-label="Mở menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="../index.html">Trang chủ</a></li>
+          <li><a href="books.html">Sách</a></li>
+          <li><a href="borrow.html">Mượn</a></li>
+          <li><a href="return.html">Trả</a></li>
+          <li><a href="profile.html">Hồ sơ</a></li>
+        </ul>
+
+        <a class="nav-cta" href="login.html">Đăng nhập</a>
+      </nav>
+    </header>
+
+    <main class="detail-page">
+      <!-- Main book detail -->
+      <section class="detail-layout" aria-labelledby="book-detail-title">
+        <div class="detail-cover-card">
+          <div class="detail-cover" id="book-cover" aria-hidden="true"></div>
+        </div>
+
+        <article class="detail-info-card">
+          <p class="eyebrow">Chi tiết sách</p>
+          <h1 id="book-detail-title">Đang tải...</h1>
+          <p class="detail-author" id="book-author"></p>
+
+          <div class="detail-meta-grid">
+            <div>
+              <span class="meta-label">Thể loại</span>
+              <p id="book-category"></p>
+            </div>
+            <div>
+              <span class="meta-label">Nhà xuất bản</span>
+              <p id="book-publisher"></p>
+            </div>
+            <div>
+              <span class="meta-label">Năm xuất bản</span>
+              <p id="book-year"></p>
+            </div>
+            <div>
+              <span class="meta-label">ISBN</span>
+              <p id="book-isbn"></p>
+            </div>
+            <div>
+              <span class="meta-label">Ngôn ngữ</span>
+              <p id="book-language"></p>
+            </div>
+            <div>
+              <span class="meta-label">Số trang</span>
+              <p id="book-pages"></p>
+            </div>
+            <div>
+              <span class="meta-label">Số bản có sẵn</span>
+              <p id="book-quantity"></p>
+            </div>
+            <div>
+              <span class="meta-label">Trạng thái</span>
+              <p id="book-status"></p>
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <button class="borrow-btn" id="borrow-btn" type="button">Mượn sách</button>
+            <button class="favorite-btn" id="favorite-btn" type="button">Thêm vào yêu thích</button>
+            <button class="back-btn" id="back-btn" type="button">Quay lại sách</button>
+          </div>
+
+          <p class="message" id="action-message" aria-live="polite"></p>
+        </article>
+      </section>
+
+      <!-- Description section -->
+      <section class="detail-section" aria-labelledby="description-title">
+        <h2 id="description-title">Mô tả sách</h2>
+        <p id="book-description"></p>
+      </section>
+
+      <!-- Table section -->
+      <section class="detail-section" aria-labelledby="info-title">
+        <h2 id="info-title">Thông tin bổ sung</h2>
+        <table class="info-table">
+          <tbody>
+            <tr>
+              <th scope="row">Thể loại</th>
+              <td id="table-category"></td>
+            </tr>
+            <tr>
+              <th scope="row">Nhà xuất bản</th>
+              <td id="table-publisher"></td>
+            </tr>
+            <tr>
+              <th scope="row">Năm xuất bản</th>
+              <td id="table-year"></td>
+            </tr>
+            <tr>
+              <th scope="row">Ngôn ngữ</th>
+              <td id="table-language"></td>
+            </tr>
+            <tr>
+              <th scope="row">Số trang</th>
+              <td id="table-pages"></td>
+            </tr>
+            <tr>
+              <th scope="row">ISBN</th>
+              <td id="table-isbn"></td>
+            </tr>
+            <tr>
+              <th scope="row">Vị trí kệ</th>
+              <td id="table-shelf"></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Related books -->
+      <section class="detail-section" aria-labelledby="related-title">
+        <h2 id="related-title">Sách liên quan</h2>
+        <div class="book-grid" id="related-books"></div>
+      </section>
+    </main>
+
+    <!-- Footer reused from the existing layout -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-column footer-about">
+          <a class="brand footer-brand" href="../index.html">
+            <span class="brand-mark">S</span>
+            <span>SmartLibrary</span>
+          </a>
+          <p>
+            SmartLibrary là một nền tảng thư viện trực tuyến giúp bạn khám phá,
+            mượn và quản lý sách một cách dễ dàng.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên kết nhanh</h3>
+          <ul>
+            <li><a href="../index.html">Trang chủ</a></li>
+            <li><a href="books.html">Danh mục sách</a></li>
+            <li><a href="borrow.html">Mượn sách</a></li>
+            <li><a href="profile.html">Hồ sơ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>Email: support@smartlibrary.vn</li>
+            <li>Điện thoại: 0123 456 789</li>
+            <li>Địa chỉ: Hà Nội, Việt Nam</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Theo dõi</h3>
+          <div class="social-links" aria-label="Mạng xã hội">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">i</a>
+            <a href="#" aria-label="Twitter">t</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 SmartLibrary. Tất cả quyền được bảo lưu.</p>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/book-detail.js"></script>
+  </body>
+</html>

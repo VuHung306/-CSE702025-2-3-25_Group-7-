@@ -1,0 +1,143 @@
+/* Page-specific styles for the Borrow page */
+
+.borrow-page {
+  width: min(1200px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.borrow-header {
+  margin-bottom: 1.5rem;
+}
+
+.borrow-header h1 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-bottom: 0.4rem;
+}
+
+.borrow-header p {
+  color: var(--muted-color);
+}
+
+.borrow-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.borrow-table-card,
+.borrow-info-card {
+  background: var(--white);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+  border: 1px solid var(--border-color);
+  padding: 1.3rem;
+}
+
+.borrow-table-card h2,
+.borrow-info-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.borrow-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.borrow-table th,
+.borrow-table td {
+  text-align: left;
+  padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.borrow-cover {
+  width: 48px;
+  height: 60px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-color), #bfdbfe);
+}
+
+.remove-btn {
+  border: none;
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 0.9rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.8rem 0.9rem;
+  background: #f8fbff;
+}
+
+.borrow-actions {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.confirm-btn,
+.cancel-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.confirm-btn {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.cancel-btn {
+  background: #e5e7eb;
+  color: var(--text-color);
+}
+
+.message {
+  min-height: 1.2rem;
+  margin-top: 1rem;
+  color: #166534;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted-color);
+  padding: 1rem 0;
+}
+
+@media (max-width: 900px) {
+  .borrow-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .borrow-actions {
+    flex-direction: column;
+  }
+}
