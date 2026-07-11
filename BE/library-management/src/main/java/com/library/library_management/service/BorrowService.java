@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Service
 public class BorrowService {
@@ -24,6 +25,10 @@ public class BorrowService {
 
     @Autowired
     private BookRepository bookRepository;
+
+    public List<Borrow> getAllBorrows() {
+        return borrowRepository.findAll();
+    }
 
     public Borrow borrowBook(BorrowCreationRequest request) {
         User user = userRepository.findById(request.getUserId())
