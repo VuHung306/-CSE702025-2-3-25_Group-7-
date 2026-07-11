@@ -2,30 +2,30 @@
 
 (() => {
   const books = [
-    { id: 1, title: 'Clean Code', author: 'Robert C. Martin', category: 'Technology', quantity: 4 },
-    { id: 2, title: 'The Hobbit', author: 'J.R.R. Tolkien', category: 'Literature', quantity: 3 },
-    { id: 3, title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', category: 'Economics', quantity: 2 },
-    { id: 4, title: 'English for Everyone', author: 'DK', category: 'Foreign Languages', quantity: 5 },
-    { id: 5, title: 'Physics for Beginners', author: 'Mina Singh', category: 'Science', quantity: 3 },
-    { id: 6, title: 'Atomic Habits', author: 'James Clear', category: 'Life Skills', quantity: 6 },
-    { id: 7, title: 'JavaScript Basics', author: 'Anna Lee', category: 'Technology', quantity: 4 },
-    { id: 8, title: 'Pride and Prejudice', author: 'Jane Austen', category: 'Literature', quantity: 2 },
-    { id: 9, title: 'The Psychology of Money', author: 'Morgan Housel', category: 'Economics', quantity: 5 },
-    { id: 10, title: 'Spanish for Beginners', author: 'Maria Ruiz', category: 'Foreign Languages', quantity: 4 },
-    { id: 11, title: 'Biology in Simple Words', author: 'Liam Patel', category: 'Science', quantity: 2 },
-    { id: 12, title: 'Communication Skills', author: 'Sarah Kim', category: 'Life Skills', quantity: 6 },
-    { id: 13, title: 'HTML and CSS Guide', author: 'Chris Brown', category: 'Technology', quantity: 3 },
-    { id: 14, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', category: 'Literature', quantity: 1 },
-    { id: 15, title: 'Finance for Students', author: 'Olivia Chen', category: 'Economics', quantity: 4 },
-    { id: 16, title: 'French Learning Made Easy', author: 'Noah Martin', category: 'Foreign Languages', quantity: 3 },
-    { id: 17, title: 'Space Exploration', author: 'David Cole', category: 'Science', quantity: 5 },
-    { id: 18, title: 'Time Management', author: 'Emily Ross', category: 'Life Skills', quantity: 4 },
-    { id: 19, title: 'React for Beginners', author: 'Alicia Stone', category: 'Technology', quantity: 2 },
-    { id: 20, title: 'The Alchemist', author: 'Paulo Coelho', category: 'Literature', quantity: 4 },
-    { id: 21, title: 'Economics 101', author: 'Brian White', category: 'Economics', quantity: 6 },
-    { id: 22, title: 'Japanese Essentials', author: 'Haruto Sato', category: 'Foreign Languages', quantity: 2 },
-    { id: 23, title: 'Everyday Chemistry', author: 'Grace Taylor', category: 'Science', quantity: 3 },
-    { id: 24, title: 'Problem Solving Skills', author: 'Mason Hall', category: 'Life Skills', quantity: 5 }
+    { id: 1, title: 'Lập trình sạch', author: 'Robert C. Martin', category: 'Công nghệ', quantity: 4 },
+    { id: 2, title: 'Hobbit', author: 'J.R.R. Tolkien', category: 'Văn học', quantity: 3 },
+    { id: 3, title: 'Tư duy nhanh và chậm', author: 'Daniel Kahneman', category: 'Kinh tế', quantity: 2 },
+    { id: 4, title: 'Tiếng Anh cho mọi người', author: 'DK', category: 'Ngoại ngữ', quantity: 5 },
+    { id: 5, title: 'Vật lý cho người mới bắt đầu', author: 'Mina Singh', category: 'Khoa học', quantity: 3 },
+    { id: 6, title: 'Thói quen nguyên tử', author: 'James Clear', category: 'Kỹ năng sống', quantity: 6 },
+    { id: 7, title: 'Cơ bản về JavaScript', author: 'Anna Lee', category: 'Công nghệ', quantity: 4 },
+    { id: 8, title: 'Kiêu hãnh và định kiến', author: 'Jane Austen', category: 'Văn học', quantity: 2 },
+    { id: 9, title: 'Tâm lý học về tiền', author: 'Morgan Housel', category: 'Kinh tế', quantity: 5 },
+    { id: 10, title: 'Tiếng Tây Ban Nha cho người mới bắt đầu', author: 'Maria Ruiz', category: 'Ngoại ngữ', quantity: 4 },
+    { id: 11, title: 'Sinh học bằng ngôn từ đơn giản', author: 'Liam Patel', category: 'Khoa học', quantity: 2 },
+    { id: 12, title: 'Kỹ năng giao tiếp', author: 'Sarah Kim', category: 'Kỹ năng sống', quantity: 6 },
+    { id: 13, title: 'Hướng dẫn HTML và CSS', author: 'Chris Brown', category: 'Công nghệ', quantity: 3 },
+    { id: 14, title: 'Đại gia Gatsby', author: 'F. Scott Fitzgerald', category: 'Văn học', quantity: 1 },
+    { id: 15, title: 'Tài chính dành cho sinh viên', author: 'Olivia Chen', category: 'Kinh tế', quantity: 4 },
+    { id: 16, title: 'Học tiếng Pháp dễ dàng', author: 'Noah Martin', category: 'Ngoại ngữ', quantity: 3 },
+    { id: 17, title: 'Khám phá không gian', author: 'David Cole', category: 'Khoa học', quantity: 5 },
+    { id: 18, title: 'Quản lý thời gian', author: 'Emily Ross', category: 'Kỹ năng sống', quantity: 4 },
+    { id: 19, title: 'React cho người mới bắt đầu', author: 'Alicia Stone', category: 'Công nghệ', quantity: 2 },
+    { id: 20, title: 'Nhà giả kim', author: 'Paulo Coelho', category: 'Văn học', quantity: 4 },
+    { id: 21, title: 'Kinh tế học nhập môn', author: 'Brian White', category: 'Kinh tế', quantity: 6 },
+    { id: 22, title: 'Tiếng Nhật thiết yếu', author: 'Haruto Sato', category: 'Ngoại ngữ', quantity: 2 },
+    { id: 23, title: 'Hóa học thường ngày', author: 'Grace Taylor', category: 'Khoa học', quantity: 3 },
+    { id: 24, title: 'Kỹ năng giải quyết vấn đề', author: 'Mason Hall', category: 'Kỹ năng sống', quantity: 5 }
   ];
 
   const booksGrid = document.getElementById('books-grid');
@@ -37,6 +37,12 @@
 
   let currentPage = 1;
   const booksPerPage = 6;
+
+  // Select a category when this page is opened from a category card on the home page.
+  const categoryFromUrl = new URLSearchParams(window.location.search).get('category');
+  if (categoryFromUrl && Array.from(categoryFilter.options).some(option => option.value === categoryFromUrl)) {
+    categoryFilter.value = categoryFromUrl;
+  }
 
   // Render one book card using the existing card structure.
   const createBookCard = book => {

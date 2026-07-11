@@ -70,7 +70,7 @@
   width: 48px;
   height: 60px;
   border-radius: 8px;
-  background: linear-gradient(135deg, var(--accent-color), #bfdbfe);
+  background: linear-gradient(135deg, var(--accent-color), #b8ddd6);
 }
 
 .return-btn {

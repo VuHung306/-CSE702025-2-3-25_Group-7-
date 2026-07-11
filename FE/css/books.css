@@ -8,7 +8,7 @@
   background: var(--white);
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 10px 25px rgba(15, 92, 102, 0.08);
 }
 
 .book-info {
@@ -26,19 +26,19 @@
 
 .borrow-btn {
   border: none;
-  background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   color: var(--white);
   padding: 0.75rem 1rem;
   border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 8px 16px rgba(37, 99, 235, 0.16);
+  box-shadow: 0 8px 16px rgba(15, 92, 102, 0.16);
 }
 
 .borrow-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+  box-shadow: 0 10px 20px rgba(15, 92, 102, 0.22);
 }
 
 .books-page {
@@ -52,10 +52,10 @@
 }
 
 .books-hero-content {
-  background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f2f8f4 100%);
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 10px 30px rgba(15, 92, 102, 0.1);
 }
 
 .books-hero-content h1 {
@@ -96,7 +96,7 @@
 .books-search-form input:focus,
 .books-filters select:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 3px rgba(15, 92, 102, 0.15);
 }
 
 .books-search-form button {

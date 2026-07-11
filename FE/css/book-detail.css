@@ -29,7 +29,7 @@
 .detail-cover {
   min-height: 420px;
   border-radius: 18px;
-  background: linear-gradient(135deg, var(--accent-color), #bfdbfe);
+  background: linear-gradient(135deg, var(--accent-color), #b8ddd6);
 }
 
 .detail-info-card {

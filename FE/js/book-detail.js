@@ -100,8 +100,8 @@
     }
   ];
 
-  const sampleBookId = 1;
-  const currentBook = books.find(book => book.id === sampleBookId) || books[0];
+  const requestedBookId = Number(new URLSearchParams(window.location.search).get('id'));
+  const currentBook = books.find(book => book.id === requestedBookId) || books[0];
 
   const title = document.getElementById('book-detail-title');
   const author = document.getElementById('book-author');

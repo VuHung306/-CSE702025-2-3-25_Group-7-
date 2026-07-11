@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SmartLibrary | Admin Dashboard</title>
+    <title>SmartLibrary | Bảng điều khiển quản trị</title>
     <link rel="stylesheet" href="../css/home.css" />
     <link rel="stylesheet" href="../css/admin.css" />
   </head>
@@ -12,7 +12,7 @@
     <header class="site-header">
       <nav class="navbar" aria-label="Điều hướng chính">
         <a class="brand" href="../index.html">
-          <span class="brand-mark">S</span>
+          <span class="brand-mark"><img src="../assets/logo/logo-smart-library.png" alt=""></span>
           <span>SmartLibrary</span>
         </a>
 
@@ -37,75 +37,75 @@
     <main class="admin-page">
       <section class="admin-shell" aria-label="Admin dashboard">
         <aside class="admin-sidebar" aria-label="Sidebar quản trị">
-          <h2>Admin Panel</h2>
+          <h2>Quản trị</h2>
           <nav class="sidebar-nav">
-            <a href="#dashboard" class="active">Dashboard</a>
-            <a href="#books-section">Books</a>
-            <a href="#categories-section">Categories</a>
-            <a href="#users-section">Users</a>
-            <a href="#borrow-section">Borrow Records</a>
-            <a href="#return-section">Return Records</a>
-            <a href="#reports-section">Reports</a>
-            <a href="#settings-section">Settings</a>
-            <a href="#logout">Logout</a>
+            <a href="#dashboard" class="active">Tổng quan</a>
+            <a href="#books-section">Sách</a>
+            <a href="#categories-section">Danh mục</a>
+            <a href="#users-section">Người dùng</a>
+            <a href="#borrow-section">Lượt mượn</a>
+            <a href="#return-section">Lượt trả</a>
+            <a href="#reports-section">Báo cáo</a>
+            <a href="#settings-section">Cài đặt</a>
+            <a href="#logout">Đăng xuất</a>
           </nav>
         </aside>
 
         <div class="admin-content">
           <section class="page-header" id="dashboard">
             <div>
-              <p class="eyebrow">Admin Dashboard</p>
-              <h1>Library Overview</h1>
+              <p class="eyebrow">Bảng điều khiển quản trị</p>
+              <h1>Tổng quan thư viện</h1>
             </div>
             <div class="header-actions">
-              <input id="book-search" type="search" placeholder="Search books" />
-              <input id="user-search" type="search" placeholder="Search users" />
+              <input id="book-search" type="search" placeholder="Tìm kiếm sách" />
+              <input id="user-search" type="search" placeholder="Tìm kiếm người dùng" />
             </div>
           </section>
 
           <section class="stats-grid" aria-label="Dashboard statistics">
             <article class="stat-card">
               <h3 id="total-books">0</h3>
-              <p>Total Books</p>
+              <p>Tổng số sách</p>
             </article>
             <article class="stat-card">
               <h3 id="available-books">0</h3>
-              <p>Available Books</p>
+              <p>Sách có sẵn</p>
             </article>
             <article class="stat-card">
               <h3 id="borrowed-books">0</h3>
-              <p>Borrowed Books</p>
+              <p>Sách đang mượn</p>
             </article>
             <article class="stat-card">
               <h3 id="total-users">0</h3>
-              <p>Total Users</p>
+              <p>Tổng người dùng</p>
             </article>
             <article class="stat-card">
               <h3 id="active-borrows">0</h3>
-              <p>Active Borrow Records</p>
+              <p>Lượt mượn đang hoạt động</p>
             </article>
           </section>
 
           <section class="content-card" aria-labelledby="borrow-records-title">
             <div class="section-heading">
-              <h2 id="borrow-records-title">Recent Borrow Records</h2>
+              <h2 id="borrow-records-title">Lượt mượn gần đây</h2>
               <select id="borrow-status-filter">
-                <option value="all">All Status</option>
-                <option value="Active">Active</option>
-                <option value="Overdue">Overdue</option>
-                <option value="Returned">Returned</option>
+                <option value="all">Tất cả trạng thái</option>
+                <option value="Active">Đang mượn</option>
+                <option value="Overdue">Quá hạn</option>
+                <option value="Returned">Đã trả</option>
               </select>
             </div>
             <div class="table-wrapper">
               <table class="admin-table">
                 <thead>
                   <tr>
-                    <th scope="col">Student Name</th>
-                    <th scope="col">Student ID</th>
-                    <th scope="col">Book Title</th>
-                    <th scope="col">Borrow Date</th>
-                    <th scope="col">Due Date</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Tên sinh viên</th>
+                    <th scope="col">Mã sinh viên</th>
+                    <th scope="col">Tên sách</th>
+                    <th scope="col">Ngày mượn</th>
+                    <th scope="col">Hạn trả</th>
+                    <th scope="col">Trạng thái</th>
                   </tr>
                 </thead>
                 <tbody id="borrow-records-body"></tbody>
@@ -115,20 +115,20 @@
 
           <section class="content-card" id="books-section" aria-labelledby="books-title">
             <div class="section-heading">
-              <h2 id="books-title">Book Management</h2>
-              <p>Manage library inventory</p>
+              <h2 id="books-title">Quản lý sách</h2>
+              <p>Quản lý kho sách của thư viện</p>
             </div>
             <div class="table-wrapper">
               <table class="admin-table">
                 <thead>
                   <tr>
-                    <th scope="col">Cover</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Bìa sách</th>
+                    <th scope="col">Tên sách</th>
+                    <th scope="col">Tác giả</th>
+                    <th scope="col">Danh mục</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Thao tác</th>
                   </tr>
                 </thead>
                 <tbody id="books-body"></tbody>
@@ -138,19 +138,19 @@
 
           <section class="content-card" id="users-section" aria-labelledby="users-title">
             <div class="section-heading">
-              <h2 id="users-title">User Management</h2>
-              <p>Manage registered students</p>
+              <h2 id="users-title">Quản lý người dùng</h2>
+              <p>Quản lý sinh viên đã đăng ký</p>
             </div>
             <div class="table-wrapper">
               <table class="admin-table">
                 <thead>
                   <tr>
-                    <th scope="col">Student ID</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Mã sinh viên</th>
+                    <th scope="col">Họ và tên</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Thao tác</th>
                   </tr>
                 </thead>
                 <tbody id="users-body"></tbody>
@@ -160,25 +160,25 @@
 
           <section class="content-card" id="reports-section" aria-labelledby="reports-title">
             <div class="section-heading">
-              <h2 id="reports-title">Reports</h2>
-              <p>Quick summary of library health</p>
+              <h2 id="reports-title">Báo cáo</h2>
+              <p>Tóm tắt nhanh tình hình thư viện</p>
             </div>
             <div class="report-grid">
               <article class="report-card">
                 <h3 id="most-borrowed">0</h3>
-                <p>Most Borrowed Books</p>
+                <p>Sách được mượn nhiều nhất</p>
               </article>
               <article class="report-card">
                 <h3 id="active-users">0</h3>
-                <p>Active Users</p>
+                <p>Người dùng hoạt động</p>
               </article>
               <article class="report-card">
                 <h3 id="overdue-books">0</h3>
-                <p>Overdue Books</p>
+                <p>Sách quá hạn</p>
               </article>
               <article class="report-card">
                 <h3 id="books-added-month">0</h3>
-                <p>Books Added This Month</p>
+                <p>Sách thêm trong tháng</p>
               </article>
             </div>
           </section>
@@ -191,26 +191,26 @@
       <div class="footer-content">
         <div class="footer-column footer-about">
           <a class="brand footer-brand" href="../index.html">
-            <span class="brand-mark">S</span>
+            <span class="brand-mark"><img src="../assets/logo/logo-smart-library.png" alt=""></span>
             <span>SmartLibrary</span>
           </a>
-          <p>SmartLibrary helps students discover, borrow, and manage books smoothly.</p>
+          <p>SmartLibrary hỗ trợ sinh viên tìm kiếm, mượn và quản lý sách thuận tiện.</p>
         </div>
         <div class="footer-column">
-          <h3>Quick Links</h3>
+          <h3>Liên kết nhanh</h3>
           <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="books.html">Books</a></li>
-            <li><a href="borrow.html">Borrow</a></li>
-            <li><a href="profile.html">Profile</a></li>
+            <li><a href="../index.html">Trang chủ</a></li>
+            <li><a href="books.html">Sách</a></li>
+            <li><a href="borrow.html">Mượn sách</a></li>
+            <li><a href="profile.html">Hồ sơ</a></li>
           </ul>
         </div>
         <div class="footer-column">
-          <h3>Contact</h3>
+          <h3>Liên hệ</h3>
           <ul>
-            <li>Email: support@smartlibrary.vn</li>
-            <li>Phone: 0123 456 789</li>
-            <li>Address: Hanoi, Vietnam</li>
+            <li>Email:24100109@st.phenikaa-uni.edu.vn</li>
+            <li>Điện thoại: 0862317764</li>
+            <li>Địa chỉ: Hà Đông, Hà Nội, Việt Nam</li>
           </ul>
         </div>
       </div>
@@ -221,11 +221,11 @@
 
     <div class="modal-backdrop" id="delete-modal" style="display:none;" aria-hidden="true">
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
-        <h3 id="delete-modal-title">Confirm Delete</h3>
-        <p id="delete-modal-message">Are you sure you want to delete this item?</p>
+        <h3 id="delete-modal-title">Xác nhận xóa</h3>
+        <p id="delete-modal-message">Bạn có chắc muốn xóa mục này?</p>
         <div class="modal-actions">
-          <button class="modal-cancel-btn" id="cancel-delete" type="button">Cancel</button>
-          <button class="modal-submit-btn" id="confirm-delete" type="button">Delete</button>
+          <button class="modal-cancel-btn" id="cancel-delete" type="button">Hủy</button>
+          <button class="modal-submit-btn" id="confirm-delete" type="button">Xóa</button>
         </div>
       </div>
     </div>

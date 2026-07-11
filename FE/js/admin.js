@@ -39,10 +39,58 @@
   const confirmDelete = document.getElementById('confirm-delete');
   const toast = document.getElementById('toast');
 
+  const booksSection = document.getElementById('books-section');
+  const addBookButton = document.createElement('button');
+  addBookButton.className = 'add-book-btn';
+  addBookButton.type = 'button';
+  addBookButton.textContent = '+ Thêm sách';
+  booksSection.querySelector('.section-heading').appendChild(addBookButton);
+
+  const addBookModal = document.createElement('div');
+  addBookModal.className = 'modal-backdrop';
+  addBookModal.id = 'add-book-modal';
+  addBookModal.style.display = 'none';
+  addBookModal.setAttribute('aria-hidden', 'true');
+  addBookModal.innerHTML = `
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="add-book-title">
+      <h3 id="add-book-title">Thêm sách mới</h3>
+      <form id="add-book-form" class="book-form">
+        <label>Tên sách<input name="title" type="text" required /></label>
+        <label>Tác giả<input name="author" type="text" required /></label>
+        <label>Thể loại<input name="category" type="text" required /></label>
+        <label>Số lượng<input name="quantity" type="number" min="1" step="1" required /></label>
+        <p class="form-error" id="add-book-error" aria-live="polite"></p>
+        <div class="modal-actions">
+          <button class="modal-cancel-btn" id="cancel-add-book" type="button">Hủy</button>
+          <button class="modal-submit-btn" type="submit">Lưu sách</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(addBookModal);
+
+  const addBookForm = document.getElementById('add-book-form');
+  const cancelAddBook = document.getElementById('cancel-add-book');
+  const addBookError = document.getElementById('add-book-error');
+
+  const closeAddBookModal = () => {
+    addBookModal.style.display = 'none';
+    addBookModal.setAttribute('aria-hidden', 'true');
+  };
+
   const showToast = message => {
     toast.textContent = message;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 1800);
+  };
+
+  const statusLabels = {
+    Active: 'Đang hoạt động',
+    Available: 'Có sẵn',
+    Borrowed: 'Đang mượn',
+    Overdue: 'Quá hạn',
+    Returned: 'Đã trả',
+    Inactive: 'Không hoạt động'
   };
 
   const updateStats = () => {
@@ -52,7 +100,7 @@
     document.getElementById('total-users').textContent = state.users.length;
     document.getElementById('active-borrows').textContent = state.borrowRecords.filter(record => record.status === 'Active' || record.status === 'Overdue').length;
 
-    const mostBorrowedBook = state.books[0] ? state.books[0].title : 'None';
+    const mostBorrowedBook = state.books[0] ? state.books[0].title : 'Không có';
     document.getElementById('most-borrowed').textContent = mostBorrowedBook;
     document.getElementById('active-users').textContent = state.users.filter(user => user.status === 'Active').length;
     document.getElementById('overdue-books').textContent = state.borrowRecords.filter(record => record.status === 'Overdue').length;
@@ -72,7 +120,7 @@
         <td>${record.title}</td>
         <td>${record.borrowDate}</td>
         <td>${record.dueDate}</td>
-        <td><span class="badge ${record.status === 'Overdue' ? 'overdue' : record.status === 'Returned' ? 'returned' : 'active'}">${record.status}</span></td>
+        <td><span class="badge ${record.status === 'Overdue' ? 'overdue' : record.status === 'Returned' ? 'returned' : 'active'}">${statusLabels[record.status]}</span></td>
       `;
       borrowRecordsBody.appendChild(row);
     });
@@ -91,10 +139,10 @@
         <td>${book.author}</td>
         <td>${book.category}</td>
         <td>${book.quantity}</td>
-        <td><span class="badge ${book.status === 'Available' ? 'available' : 'active'}">${book.status}</span></td>
+        <td><span class="badge ${book.status === 'Available' ? 'available' : 'active'}">${statusLabels[book.status]}</span></td>
         <td>
-          <button class="action-btn edit" type="button">Edit</button>
-          <button class="action-btn delete" type="button" data-type="book" data-id="${book.id}">Delete</button>
+          <button class="action-btn edit" type="button">Sửa</button>
+          <button class="action-btn delete" type="button" data-type="book" data-id="${book.id}">Xóa</button>
         </td>
       `;
       booksBody.appendChild(row);
@@ -113,20 +161,28 @@
         <td>${user.name}</td>
         <td>${user.email}</td>
         <td>${user.phone}</td>
-        <td><span class="badge ${user.status === 'Active' ? 'enabled' : 'active'}">${user.status}</span></td>
+        <td><span class="badge ${user.status === 'Active' ? 'enabled' : 'active'}">${statusLabels[user.status]}</span></td>
         <td>
-          <button class="action-btn edit" type="button">Edit</button>
-          <button class="action-btn delete" type="button" data-type="user" data-id="${user.id}">Delete</button>
+          <button class="action-btn edit" type="button">Sửa</button>
+          <button class="action-btn delete" type="button" data-type="user" data-id="${user.id}">Xóa</button>
         </td>
       `;
       usersBody.appendChild(row);
     });
   };
 
+  const openAddBookModal = () => {
+    addBookForm.reset();
+    addBookError.textContent = '';
+    addBookModal.style.display = 'grid';
+    addBookModal.setAttribute('aria-hidden', 'false');
+    addBookForm.elements.title.focus();
+  };
+
   const openDeleteModal = (type, id) => {
     state.selectedType = type;
     state.selectedItem = id;
-    modalMessage.textContent = `Are you sure you want to delete this ${type}?`;
+    modalMessage.textContent = `Bạn có chắc muốn xóa ${type === 'book' ? 'sách' : 'người dùng'} này?`;
     modal.style.display = 'grid';
     modal.setAttribute('aria-hidden', 'false');
   };
@@ -149,7 +205,7 @@
     renderUsers();
     updateStats();
     closeDeleteModal();
-    showToast('Item deleted successfully');
+    showToast('Đã xóa thành công');
   };
 
   // Highlight the current sidebar section.
@@ -164,6 +220,35 @@
   bookSearch.addEventListener('input', renderBooks);
   userSearch.addEventListener('input', renderUsers);
   filterSelect.addEventListener('change', renderBorrowRecords);
+
+  addBookButton.addEventListener('click', openAddBookModal);
+  cancelAddBook.addEventListener('click', closeAddBookModal);
+  addBookModal.addEventListener('click', event => {
+    if (event.target === addBookModal) closeAddBookModal();
+  });
+  addBookForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const formData = new FormData(addBookForm);
+    const quantity = Number(formData.get('quantity'));
+
+    if (!Number.isInteger(quantity) || quantity < 1) {
+      addBookError.textContent = 'Số lượng phải là số nguyên lớn hơn 0.';
+      return;
+    }
+
+    state.books.push({
+      id: Math.max(0, ...state.books.map(book => book.id)) + 1,
+      title: formData.get('title').trim(),
+      author: formData.get('author').trim(),
+      category: formData.get('category').trim(),
+      quantity,
+      status: 'Available'
+    });
+    renderBooks();
+    updateStats();
+    closeAddBookModal();
+    showToast('Đã thêm sách thành công');
+  });
 
   // Delete button handling.
   document.addEventListener('click', event => {

@@ -10,7 +10,7 @@
     <header class="site-header">
       <nav class="navbar" aria-label="Điều hướng chính">
         <a class="brand" href="index.html">
-          <span class="brand-mark">S</span>
+          <span class="brand-mark"><img src="assets/logo/logo-smart-library.png" alt=""></span>
           <span>SmartLibrary</span>
         </a>
 
@@ -52,22 +52,30 @@
           <p>Khám phá các lĩnh vực yêu thích của bạn.</p>
         </div>
         <div class="card-grid">
-          <article class="category-card">
-            <h3>Technology</h3>
+          <a class="category-card" href="pages/books.html?category=Technology">
+            <h3>Công nghệ</h3>
             <p>Công nghệ và lập trình</p>
-          </article>
-          <article class="category-card">
-            <h3>Literature</h3>
+          </a>
+          <a class="category-card" href="pages/books.html?category=Literature">
+            <h3>Văn học</h3>
             <p>Văn học và tiểu thuyết</p>
-          </article>
-          <article class="category-card">
-            <h3>Economics</h3>
+          </a>
+          <a class="category-card" href="pages/books.html?category=Economics">
+            <h3>Kinh tế</h3>
             <p>Kinh tế và quản lý</p>
-          </article>
-          <article class="category-card">
-            <h3>Science</h3>
+          </a>
+          <a class="category-card" href="pages/books.html?category=Foreign%20Languages">
+            <h3>Ngoại ngữ</h3>
+            <p>Học và rèn luyện ngoại ngữ</p>
+          </a>
+          <a class="category-card" href="pages/books.html?category=Science">
+            <h3>Khoa học</h3>
             <p>Khoa học và khám phá</p>
-          </article>
+          </a>
+          <a class="category-card" href="pages/books.html?category=Life%20Skills">
+            <h3>Kỹ năng sống</h3>
+            <p>Phát triển bản thân mỗi ngày</p>
+          </a>
         </div>
       </section>
 
@@ -76,7 +84,9 @@
           <h2 id="featured-title">Sách nổi bật</h2>
           <p>Những cuốn sách được nhiều người quan tâm nhất.</p>
         </div>
-        <div class="book-grid">
+        <div class="featured-carousel">
+          <button class="carousel-control carousel-control-prev" type="button" aria-label="Xem sách trước" data-carousel="previous">‹</button>
+          <div class="book-grid featured-books-track" id="featured-books-track" tabindex="0" aria-label="Danh sách sách nổi bật">
           <article class="book-card">
             <div class="book-cover" aria-hidden="true"></div>
             <h3>Clean Code</h3>
@@ -101,6 +111,26 @@
               <a href="pages/book-detail.html">Xem chi tiết</a>
             </div>
           </article>
+            <article class="book-card">
+              <div class="book-cover" aria-hidden="true"></div>
+              <h3>Thinking, Fast and Slow</h3>
+              <p class="meta">Daniel Kahneman · Kinh tế</p>
+              <div class="book-actions"><a href="pages/book-detail.html?id=3">Xem chi tiết</a></div>
+            </article>
+            <article class="book-card">
+              <div class="book-cover" aria-hidden="true"></div>
+              <h3>English for Everyone</h3>
+              <p class="meta">DK · Ngoại ngữ</p>
+              <div class="book-actions"><a href="pages/book-detail.html?id=4">Xem chi tiết</a></div>
+            </article>
+            <article class="book-card">
+              <div class="book-cover" aria-hidden="true"></div>
+              <h3>Physics for Beginners</h3>
+              <p class="meta">Mina Singh · Khoa học</p>
+              <div class="book-actions"><a href="pages/book-detail.html?id=5">Xem chi tiết</a></div>
+            </article>
+          </div>
+          <button class="carousel-control carousel-control-next" type="button" aria-label="Xem sách tiếp theo" data-carousel="next">›</button>
         </div>
       </section>
 
@@ -134,7 +164,7 @@
       <div class="footer-content">
         <div class="footer-column footer-about">
           <a class="brand footer-brand" href="index.html">
-            <span class="brand-mark">S</span>
+            <span class="brand-mark"><img src="assets/logo/logo-smart-library.png" alt=""></span>
             <span>SmartLibrary</span>
           </a>
           <p>SmartLibrary là nền tảng thư viện trực tuyến giúp bạn dễ dàng tìm sách, theo dõi và quản lý hoạt động mượn trả.</p>
@@ -171,5 +201,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/featured-carousel.js"></script>
   </body>
 </html>

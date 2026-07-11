@@ -7,9 +7,7 @@
   const emailInput = document.getElementById('email');
   const phoneInput = document.getElementById('phone');
   const passwordInput = document.getElementById('password');
-  const confirmPasswordInput = document.getElementById('confirm-password');
   const togglePasswordButton = document.getElementById('toggle-password');
-  const toggleConfirmPasswordButton = document.getElementById('toggle-confirm-password');
   const formMessage = document.getElementById('form-message');
 
   const fullNameError = document.getElementById('full-name-error');
@@ -17,20 +15,12 @@
   const emailError = document.getElementById('email-error');
   const phoneError = document.getElementById('phone-error');
   const passwordError = document.getElementById('password-error');
-  const confirmPasswordError = document.getElementById('confirm-password-error');
 
   // Toggle the password field visibility.
   togglePasswordButton.addEventListener('click', () => {
     const isPassword = passwordInput.type === 'password';
     passwordInput.type = isPassword ? 'text' : 'password';
     togglePasswordButton.textContent = isPassword ? 'Ẩn' : 'Hiện';
-  });
-
-  // Toggle the confirm password field visibility.
-  toggleConfirmPasswordButton.addEventListener('click', () => {
-    const isPassword = confirmPasswordInput.type === 'password';
-    confirmPasswordInput.type = isPassword ? 'text' : 'password';
-    toggleConfirmPasswordButton.textContent = isPassword ? 'Ẩn' : 'Hiện';
   });
 
   // Validate the form before submission.
@@ -42,7 +32,6 @@
     emailError.textContent = '';
     phoneError.textContent = '';
     passwordError.textContent = '';
-    confirmPasswordError.textContent = '';
     formMessage.textContent = '';
 
     if (fullNameInput.value.trim() === '') {
@@ -79,14 +68,6 @@
       isValid = false;
     } else if (passwordInput.value.length < 8) {
       passwordError.textContent = 'Mật khẩu phải có ít nhất 8 ký tự.';
-      isValid = false;
-    }
-
-    if (confirmPasswordInput.value === '') {
-      confirmPasswordError.textContent = 'Vui lòng xác nhận mật khẩu.';
-      isValid = false;
-    } else if (confirmPasswordInput.value !== passwordInput.value) {
-      confirmPasswordError.textContent = 'Mật khẩu xác nhận không khớp.';
       isValid = false;
     }
 
