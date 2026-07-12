@@ -47,6 +47,10 @@ public class BorrowService {
         borrow.setFineamount(BigDecimal.ZERO);
         borrow.setStatus(false);
 
+        // Book.status represents availability in the current schema.
+        book.setStatus(false);
+        bookRepository.save(book);
+
         return borrowRepository.save(borrow);
     }
 
@@ -74,6 +78,9 @@ public class BorrowService {
         }
 
         borrow.setFineamount(fine);
+
+        borrow.getBook().setStatus(true);
+        bookRepository.save(borrow.getBook());
 
         return borrowRepository.save(borrow);
     }

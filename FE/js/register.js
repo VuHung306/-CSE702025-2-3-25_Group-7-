@@ -1,91 +1,33 @@
-// Simple form validation and password toggle behavior for the register page.
-
 (() => {
   const form = document.getElementById('register-form');
-  const fullNameInput = document.getElementById('full-name');
-  const studentIdInput = document.getElementById('student-id');
-  const emailInput = document.getElementById('email');
-  const phoneInput = document.getElementById('phone');
-  const passwordInput = document.getElementById('password');
-  const togglePasswordButton = document.getElementById('toggle-password');
-  const formMessage = document.getElementById('form-message');
-
-  const fullNameError = document.getElementById('full-name-error');
-  const studentIdError = document.getElementById('student-id-error');
-  const emailError = document.getElementById('email-error');
-  const phoneError = document.getElementById('phone-error');
-  const passwordError = document.getElementById('password-error');
-
-  // Toggle the password field visibility.
-  togglePasswordButton.addEventListener('click', () => {
-    const isPassword = passwordInput.type === 'password';
-    passwordInput.type = isPassword ? 'text' : 'password';
-    togglePasswordButton.textContent = isPassword ? 'Ẩn' : 'Hiện';
+  const message = document.getElementById('form-message');
+  const password = document.getElementById('password');
+  document.getElementById('toggle-password').addEventListener('click', () => {
+    password.type = password.type === 'password' ? 'text' : 'password';
   });
 
-  // Validate the form before submission.
-  const validateForm = () => {
-    let isValid = true;
-
-    fullNameError.textContent = '';
-    studentIdError.textContent = '';
-    emailError.textContent = '';
-    phoneError.textContent = '';
-    passwordError.textContent = '';
-    formMessage.textContent = '';
-
-    if (fullNameInput.value.trim() === '') {
-      fullNameError.textContent = 'Vui lòng nhập họ và tên.';
-      isValid = false;
-    }
-
-    if (studentIdInput.value.trim() === '') {
-      studentIdError.textContent = 'Vui lòng nhập mã sinh viên.';
-      isValid = false;
-    } else if (!/^\d+$/.test(studentIdInput.value.trim())) {
-      studentIdError.textContent = 'Mã sinh viên chỉ được chứa số.';
-      isValid = false;
-    }
-
-    if (emailInput.value.trim() === '') {
-      emailError.textContent = 'Vui lòng nhập email.';
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
-      emailError.textContent = 'Email không hợp lệ.';
-      isValid = false;
-    }
-
-    if (phoneInput.value.trim() === '') {
-      phoneError.textContent = 'Vui lòng nhập số điện thoại.';
-      isValid = false;
-    } else if (!/^\d{10}$/.test(phoneInput.value.trim())) {
-      phoneError.textContent = 'Số điện thoại phải có 10 chữ số.';
-      isValid = false;
-    }
-
-    if (passwordInput.value === '') {
-      passwordError.textContent = 'Vui lòng nhập mật khẩu.';
-      isValid = false;
-    } else if (passwordInput.value.length < 8) {
-      passwordError.textContent = 'Mật khẩu phải có ít nhất 8 ký tự.';
-      isValid = false;
-    }
-
-    return isValid;
-  };
-
-  // Handle form submit.
-  form.addEventListener('submit', event => {
+  form.addEventListener('submit', async event => {
     event.preventDefault();
-
-    if (!validateForm()) {
-      formMessage.textContent = 'Vui lòng sửa các lỗi bên trên.';
-      formMessage.style.color = '#dc2626';
+    const fullName = document.getElementById('full-name').value.trim();
+    const username = document.getElementById('student-id').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const names = fullName.split(/\s+/);
+    if (!fullName || !username || !email || !phone || password.value.length < 8) {
+      message.textContent = 'Vui lòng điền đủ thông tin; mật khẩu tối thiểu 8 ký tự.';
+      message.style.color = '#dc2626';
       return;
     }
-
-    formMessage.textContent = 'Đăng ký thành công!';
-    formMessage.style.color = '#166534';
-    form.reset();
+    try {
+      await SmartLibraryApi.post('/users/register', {
+        username, password: password.value, firstname: names.shift(), lastname: names.join(' '), email, phone, dob: null
+      });
+      message.textContent = 'Đăng ký thành công. Bạn có thể đăng nhập ngay.';
+      message.style.color = '#166534';
+      form.reset();
+    } catch (error) {
+      message.textContent = error.message || 'Không thể đăng ký.';
+      message.style.color = '#dc2626';
+    }
   });
 })();

@@ -1,80 +1,26 @@
-// Mock borrowed books and simple return actions.
-
 (() => {
-  const borrowedBooks = [
-    {
-      id: 1,
-      title: 'Clean Code',
-      borrowDate: '01/07/2026',
-      dueDate: '15/07/2026',
-      status: 'On Time'
-    },
-    {
-      id: 2,
-      title: 'The Hobbit',
-      borrowDate: '28/06/2026',
-      dueDate: '12/07/2026',
-      status: 'Overdue'
-    },
-    {
-      id: 3,
-      title: 'Atomic Habits',
-      borrowDate: '03/07/2026',
-      dueDate: '17/07/2026',
-      status: 'On Time'
-    }
-  ];
-
-  const borrowedList = document.getElementById('borrowed-list');
-  const totalBorrowed = document.getElementById('total-borrowed');
-  const totalOverdue = document.getElementById('total-overdue');
-
-  // Render the borrowed books list.
-  const renderBooks = () => {
-    borrowedList.innerHTML = '';
-
-    if (!borrowedBooks.length) {
-      borrowedList.innerHTML = '<tr><td colspan="6" class="empty-state">No borrowed books.</td></tr>';
-      updateSummary();
-      return;
-    }
-
-    borrowedBooks.forEach(book => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td><div class="return-cover" aria-hidden="true"></div></td>
-        <td>${book.title}</td>
-        <td>${book.borrowDate}</td>
-        <td>${book.dueDate}</td>
-        <td><span class="${book.status === 'Overdue' ? 'status-overdue' : 'status-on-time'}">${book.status}</span></td>
-        <td><button class="return-btn" type="button" data-id="${book.id}">Trả</button></td>
-      `;
-      borrowedList.appendChild(row);
-    });
-
-    updateSummary();
+  const list = document.getElementById('borrowed-list');
+  const user = SmartLibraryApi.currentUser();
+  const format = value => value ? new Date(value).toLocaleDateString('vi-VN') : '-';
+  async function load() {
+    if (!user) { list.innerHTML = '<tr><td colspan="6" class="empty-state">Vui lòng đăng nhập để xem sách đang mượn.</td></tr>'; return; }
+    try {
+      const borrows = (await SmartLibraryApi.get('/borrows/')).filter(item => item.user && item.user.id === user.id && !item.status);
+      document.getElementById('total-borrowed').textContent = borrows.length;
+      document.getElementById('total-overdue').textContent = borrows.filter(item => new Date(item.duedate) < new Date()).length;
+      list.innerHTML = borrows.length ? '' : '<tr><td colspan="6" class="empty-state">Không có sách đang mượn.</td></tr>';
+      borrows.forEach(item => {
+        const overdue = new Date(item.duedate) < new Date();
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><div class="return-cover"></div></td><td>${item.book.name}</td><td>${format(item.borrowtime)}</td><td>${format(item.duedate)}</td><td><span class="${overdue ? 'status-overdue' : 'status-on-time'}">${overdue ? 'Quá hạn' : 'Đúng hạn'}</span></td><td><button class="return-btn" data-id="${item.id}">Trả</button></td>`;
+        list.appendChild(row);
+      });
+    } catch (error) { list.innerHTML = `<tr><td colspan="6" class="empty-state">${error.message}</td></tr>`; }
+  }
+  list.onclick = async event => {
+    const button = event.target.closest('.return-btn'); if (!button) return;
+    try { await SmartLibraryApi.put(`/borrows/return/${button.dataset.id}`, {}); await load(); }
+    catch (error) { alert(error.message || 'Không thể trả sách.'); }
   };
-
-  // Update the summary values.
-  const updateSummary = () => {
-    totalBorrowed.textContent = borrowedBooks.length;
-    totalOverdue.textContent = borrowedBooks.filter(book => book.status === 'Overdue').length;
-  };
-
-  // Remove a book from the list when the return button is clicked.
-  borrowedList.addEventListener('click', event => {
-    const button = event.target.closest('.return-btn');
-    if (!button) return;
-
-    const id = Number(button.getAttribute('data-id'));
-    const index = borrowedBooks.findIndex(book => book.id === id);
-
-    if (index !== -1) {
-      borrowedBooks.splice(index, 1);
-      renderBooks();
-      alert('Sách đã được trả thành công!');
-    }
-  });
-
-  renderBooks();
+  load();
 })();

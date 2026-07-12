@@ -1,74 +1,42 @@
-// Simple form validation and UI behavior for the login page.
-
 (() => {
   const form = document.getElementById('login-form');
-  const identifierInput = document.getElementById('identifier');
-  const passwordInput = document.getElementById('password');
-  const togglePasswordButton = document.getElementById('toggle-password');
-  const rememberMeCheckbox = document.getElementById('remember-me');
-  const formMessage = document.getElementById('form-message');
-  const identifierError = document.getElementById('identifier-error');
-  const passwordError = document.getElementById('password-error');
+  const identifier = document.getElementById('identifier');
+  const password = document.getElementById('password');
+  const message = document.getElementById('form-message');
+  const toggle = document.getElementById('toggle-password');
+  const remember = document.getElementById('remember-me');
 
-  // Load saved remember-me preference from localStorage.
-  const savedIdentifier = localStorage.getItem('smartlibrary-identifier');
-  const savedRemember = localStorage.getItem('smartlibrary-remember') === 'true';
-
-  if (savedIdentifier) {
-    identifierInput.value = savedIdentifier;
-  }
-
-  if (savedRemember) {
-    rememberMeCheckbox.checked = true;
-  }
-
-  // Toggle password visibility.
-  togglePasswordButton.addEventListener('click', () => {
-    const isPassword = passwordInput.type === 'password';
-    passwordInput.type = isPassword ? 'text' : 'password';
-    togglePasswordButton.textContent = isPassword ? 'Ẩn' : 'Hiện';
+  const saved = localStorage.getItem('smartlibrary-identifier');
+  if (saved) identifier.value = saved;
+  remember.checked = localStorage.getItem('smartlibrary-remember') === 'true';
+  toggle.addEventListener('click', () => {
+    password.type = password.type === 'password' ? 'text' : 'password';
   });
 
-  // Validate the form before submission.
-  const validateForm = () => {
-    let isValid = true;
-
-    identifierError.textContent = '';
-    passwordError.textContent = '';
-    formMessage.textContent = '';
-
-    if (identifierInput.value.trim() === '') {
-      identifierError.textContent = 'Vui lòng nhập mã sinh viên hoặc email.';
-      isValid = false;
-    }
-
-    if (passwordInput.value.trim() === '') {
-      passwordError.textContent = 'Vui lòng nhập mật khẩu.';
-      isValid = false;
-    }
-
-    return isValid;
-  };
-
-  // Handle form submission.
-  form.addEventListener('submit', event => {
+  form.addEventListener('submit', async event => {
     event.preventDefault();
-
-    if (!validateForm()) {
-      formMessage.textContent = 'Vui lòng điền đầy đủ thông tin.';
-      formMessage.style.color = '#dc2626';
+    message.textContent = '';
+    if (!identifier.value.trim() || !password.value) {
+      message.textContent = 'Vui lòng nhập tên đăng nhập và mật khẩu.';
+      message.style.color = '#dc2626';
       return;
     }
-
-    if (rememberMeCheckbox.checked) {
-      localStorage.setItem('smartlibrary-identifier', identifierInput.value.trim());
-      localStorage.setItem('smartlibrary-remember', 'true');
-    } else {
-      localStorage.removeItem('smartlibrary-identifier');
-      localStorage.setItem('smartlibrary-remember', 'false');
+    try {
+      // Backend currently authenticates by username, not email.
+      const user = await SmartLibraryApi.post('/users/login', { username: identifier.value.trim(), password: password.value });
+      SmartLibraryApi.setCurrentUser(user);
+      if (remember.checked) {
+        localStorage.setItem('smartlibrary-identifier', identifier.value.trim());
+        localStorage.setItem('smartlibrary-remember', 'true');
+      }
+      message.textContent = 'Đăng nhập thành công, đang chuyển trang...';
+      message.style.color = '#166534';
+      setTimeout(() => {
+        window.location.href = user.role && user.role.name === 'ADMIN' ? 'admin.html' : 'profile.html';
+      }, 500);
+    } catch (error) {
+      message.textContent = error.message || 'Không thể đăng nhập. Hãy kiểm tra backend.';
+      message.style.color = '#dc2626';
     }
-
-    formMessage.textContent = 'Đăng nhập thành công!';
-    formMessage.style.color = '#166534';
   });
 })();

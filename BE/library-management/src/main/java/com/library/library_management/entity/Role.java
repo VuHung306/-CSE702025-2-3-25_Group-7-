@@ -7,12 +7,13 @@ import lombok.ToString;
 import java.util.List;
 
 @Entity
+@Table(name = "role")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private String id;
+    private Integer id;
 
     private String name;
 
@@ -21,11 +22,11 @@ public class Role {
     @ToString.Exclude
     private List<User> users;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

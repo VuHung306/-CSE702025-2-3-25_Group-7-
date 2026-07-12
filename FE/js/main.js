@@ -165,6 +165,35 @@
     showSearchNotice();
     createScrollTopButton();
 
+    // Keep the login state visible on every page. The login page stores this
+    // object after a successful API response.
+    const savedUser = localStorage.getItem('smartlibrary-user');
+    const navCta = document.querySelector('.nav-cta');
+    if (savedUser && navCta) {
+      try {
+        const user = JSON.parse(savedUser);
+        const isAdmin = user.role && user.role.name === 'ADMIN';
+        const isPageInsidePagesFolder = window.location.pathname.includes('/pages/');
+        const pagePrefix = isPageInsidePagesFolder ? '' : 'pages/';
+        navCta.textContent = `Xin chào, ${user.username}`;
+        navCta.href = `${pagePrefix}${isAdmin ? 'admin.html' : 'profile.html'}`;
+
+        const logoutButton = document.createElement('button');
+        logoutButton.type = 'button';
+        logoutButton.className = 'nav-cta logout-btn';
+        logoutButton.textContent = 'Đăng xuất';
+        logoutButton.style.marginLeft = '0.5rem';
+        logoutButton.addEventListener('click', () => {
+          localStorage.removeItem('smartlibrary-user');
+          localStorage.removeItem('smartlibrary-borrow-cart');
+          window.location.href = `${pagePrefix}login.html`;
+        });
+        navCta.insertAdjacentElement('afterend', logoutButton);
+      } catch (_) {
+        localStorage.removeItem('smartlibrary-user');
+      }
+    }
+
     if (mobileMenuToggle) {
       mobileMenuToggle.addEventListener('click', toggleMobileMenu);
     }

@@ -1,5 +1,7 @@
 package com.library.library_management.dto.request;
 
+import java.util.List;
+
 public class BookCreationRequest {
 
     private String userId;
@@ -9,6 +11,7 @@ public class BookCreationRequest {
     private Boolean status;
     private String isbn;
     private String publisher;
+    private List<Integer> typeIds;
 
     public String getUserId() {
         return userId;
@@ -64,5 +67,13 @@ public class BookCreationRequest {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public List<Integer> getTypeIds() {
+        return typeIds;
+    }
+
+    public void setTypeIds(List<Integer> typeIds) {
+        this.typeIds = typeIds;
     }
 }

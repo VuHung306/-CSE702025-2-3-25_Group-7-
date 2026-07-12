@@ -3,9 +3,11 @@ package com.library.library_management.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-
+@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +30,12 @@ public class Book {
 
     @Column(name = "publisher")
     private String publisher;
+
+    @ManyToMany
+    @JoinTable(name = "book_has_type",
+            joinColumns = @JoinColumn(name = "Book_id"),
+            inverseJoinColumns = @JoinColumn(name = "Type_id"))
+    private Set<Type> types = new HashSet<>();
 
     public Book( String name, String author, LocalDate release_day, Boolean status, String isbn, String publisher) {
         this.name = name;
@@ -96,5 +104,13 @@ public class Book {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public Set<Type> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<Type> types) {
+        this.types = types;
     }
 }
