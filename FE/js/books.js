@@ -4,6 +4,10 @@
   const form = document.getElementById('search-form');
   const category = document.getElementById('category-filter');
   const sort = document.getElementById('sort-select');
+  const hiddenCategoryNames = new Set([
+    'Technology', 'Literature', 'Economics',
+    'Foreign Languages', 'Science', 'Life Skills'
+  ]);
   let books = [];
 
   function syncCategoryToUrl() {
@@ -50,9 +54,10 @@
         SmartLibraryApi.get('/books/'), SmartLibraryApi.get('/types/')
       ]);
       books = loadedBooks;
-      category.innerHTML = '<option value="all">Tất cả thể loại</option>' + types.map(type => `<option value="${type.id}">${type.name}</option>`).join('');
+      const visibleTypes = types.filter(type => !hiddenCategoryNames.has(type.name));
+      category.innerHTML = '<option value="all">Tất cả thể loại</option>' + visibleTypes.map(type => `<option value="${type.id}">${type.name}</option>`).join('');
       const categoryFromUrl = new URLSearchParams(window.location.search).get('category');
-      const matchingType = types.find(type => type.name === categoryFromUrl);
+      const matchingType = visibleTypes.find(type => type.name === categoryFromUrl);
       if (matchingType) category.value = String(matchingType.id);
       render();
     } catch (error) {

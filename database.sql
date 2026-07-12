@@ -80,7 +80,7 @@ CREATE TABLE borrow (
 INSERT INTO role(name)
 VALUES
 ('ADMIN'),
-('Librarian'),
+('LIBRARIAN'),
 ('USER');
 
 INSERT INTO `user`

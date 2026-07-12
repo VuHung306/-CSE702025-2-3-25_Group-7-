@@ -32,7 +32,8 @@
       message.textContent = 'Đăng nhập thành công, đang chuyển trang...';
       message.style.color = '#166534';
       setTimeout(() => {
-        window.location.href = user.role && user.role.name === 'ADMIN' ? 'admin.html' : 'profile.html';
+        const isStaff = user.role && (user.role.name === 'ADMIN' || user.role.name.toUpperCase() === 'LIBRARIAN');
+        window.location.href = isStaff ? 'admin.html' : 'profile.html';
       }, 500);
     } catch (error) {
       message.textContent = error.message || 'Không thể đăng nhập. Hãy kiểm tra backend.';

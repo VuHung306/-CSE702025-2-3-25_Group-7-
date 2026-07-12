@@ -30,7 +30,7 @@ public class TypeService implements ITypeService{
 
         String roleName = user.getRole().getName();
 
-        if (!roleName.equals("ADMIN") && !roleName.equals("Librarian")) {
+        if (!roleName.equalsIgnoreCase("ADMIN") && !roleName.equalsIgnoreCase("LIBRARIAN")) {
             throw new ResponseStatusException(
                     HttpStatus.FORBIDDEN,
                     "Bạn không có quyền thực hiện chức năng này");

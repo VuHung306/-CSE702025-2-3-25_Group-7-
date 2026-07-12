@@ -157,6 +157,13 @@
 
   // Initialize all page interactions.
   const init = () => {
+    const logout = () => {
+      localStorage.removeItem('smartlibrary-user');
+      localStorage.removeItem('smartlibrary-borrow-cart');
+      const isPageInsidePagesFolder = window.location.pathname.includes('/pages/');
+      window.location.href = isPageInsidePagesFolder ? '../index.html' : 'index.html';
+    };
+
     handleResponsiveMenu();
     handleScroll();
     highlightActiveLink();
@@ -173,26 +180,30 @@
       try {
         const user = JSON.parse(savedUser);
         const isAdmin = user.role && user.role.name === 'ADMIN';
+        const isLibrarian = user.role && user.role.name.toUpperCase() === 'LIBRARIAN';
         const isPageInsidePagesFolder = window.location.pathname.includes('/pages/');
         const pagePrefix = isPageInsidePagesFolder ? '' : 'pages/';
         navCta.textContent = `Xin chào, ${user.username}`;
-        navCta.href = `${pagePrefix}${isAdmin ? 'admin.html' : 'profile.html'}`;
+        navCta.href = `${pagePrefix}${(isAdmin || isLibrarian) ? 'admin.html' : 'profile.html'}`;
 
         const logoutButton = document.createElement('button');
         logoutButton.type = 'button';
         logoutButton.className = 'nav-cta logout-btn';
         logoutButton.textContent = 'Đăng xuất';
         logoutButton.style.marginLeft = '0.5rem';
-        logoutButton.addEventListener('click', () => {
-          localStorage.removeItem('smartlibrary-user');
-          localStorage.removeItem('smartlibrary-borrow-cart');
-          window.location.href = `${pagePrefix}login.html`;
-        });
+        logoutButton.addEventListener('click', logout);
         navCta.insertAdjacentElement('afterend', logoutButton);
       } catch (_) {
         localStorage.removeItem('smartlibrary-user');
       }
     }
+
+    document.querySelectorAll('a[href="#logout"]').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        logout();
+      });
+    });
 
     if (mobileMenuToggle) {
       mobileMenuToggle.addEventListener('click', toggleMobileMenu);

@@ -4,9 +4,17 @@
   const usersBody = document.getElementById('users-body');
   const borrowsBody = document.getElementById('borrow-records-body');
   const toast = document.getElementById('toast');
+  const isAdmin = user?.role?.name === 'ADMIN';
+  const isLibrarian = user?.role?.name?.toUpperCase() === 'LIBRARIAN';
   let books = [], users = [], borrows = [];
-  const notify = text => { toast.textContent = text; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2000); };
+
+  const notify = message => {
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  };
   const fullName = item => `${item.firstname || ''} ${item.lastname || ''}`.trim() || item.username;
+
   const booksHeading = document.querySelector('#books-section .section-heading');
   const addButton = document.createElement('button');
   addButton.className = 'add-book-btn';
@@ -55,17 +63,28 @@
       addModal.querySelector('#add-book-error').textContent = error.message || 'Không thể thêm sách.';
     }
   };
+
   const render = () => {
     const keyword = document.getElementById('book-search').value.toLowerCase();
     booksBody.innerHTML = '';
     books.filter(book => `${book.name} ${book.author}`.toLowerCase().includes(keyword)).forEach(book => {
       booksBody.innerHTML += `<tr><td><div class="book-cover"></div></td><td>${book.name}</td><td>${book.author}</td><td>${book.publisher || '-'}</td><td>-</td><td>${book.status ? 'Có sẵn' : 'Đang mượn'}</td><td><button class="action-btn delete" data-book="${book.id}">Xóa</button></td></tr>`;
     });
+
     const userKeyword = document.getElementById('user-search').value.toLowerCase();
     usersBody.innerHTML = '';
     users.filter(item => `${fullName(item)} ${item.username}`.toLowerCase().includes(userKeyword)).forEach(item => {
-      usersBody.innerHTML += `<tr><td>${item.username}</td><td>${fullName(item)}</td><td>${item.email}</td><td>${item.phone || '-'}</td><td>${item.role?.name || 'USER'}</td><td><button class="action-btn delete" data-user="${item.id}">Xóa</button></td></tr>`;
+      const roleName = (item.role?.name || 'USER').toUpperCase();
+      const normalizedRole = roleName;
+      let actions = '-';
+      if (isAdmin && normalizedRole === 'USER') {
+        actions = `<button class="action-btn edit" data-role="LIBRARIAN" data-user="${item.id}">Cấp quyền thủ thư</button><button class="action-btn delete" data-user="${item.id}">Xóa</button>`;
+      } else if (isAdmin && normalizedRole === 'LIBRARIAN') {
+        actions = `<button class="action-btn edit" data-role="USER" data-user="${item.id}">Thu hồi quyền</button><button class="action-btn delete" data-user="${item.id}">Xóa</button>`;
+      }
+      usersBody.innerHTML += `<tr><td>${item.username}</td><td>${fullName(item)}</td><td>${item.email}</td><td>${item.phone || '-'}</td><td>${roleName}</td><td>${actions}</td></tr>`;
     });
+
     const filter = document.getElementById('borrow-status-filter').value;
     borrowsBody.innerHTML = '';
     borrows.filter(item => filter === 'all' || (filter === 'Returned' ? item.status : !item.status)).forEach(item => {
@@ -81,25 +100,48 @@
     document.getElementById('active-users').textContent = users.length;
     document.getElementById('overdue-books').textContent = borrows.filter(item => !item.status && new Date(item.duedate) < new Date()).length;
   };
+
   async function load() {
-    if (!user || user.role?.name !== 'ADMIN') { window.location.href = 'login.html'; return; }
+    if (!user || (!isAdmin && !isLibrarian)) {
+      window.location.href = 'login.html';
+      return;
+    }
     try {
       [books, users, borrows] = await Promise.all([
-        SmartLibraryApi.get('/books/'), SmartLibraryApi.get(`/users/?adminId=${encodeURIComponent(user.id)}`), SmartLibraryApi.get('/borrows/')
+        SmartLibraryApi.get('/books/'),
+        SmartLibraryApi.get(`/users/?adminId=${encodeURIComponent(user.id)}`),
+        SmartLibraryApi.get('/borrows/')
       ]);
       render();
-    } catch (error) { notify(error.message || 'Không tải được dữ liệu quản trị.'); }
+    } catch (error) {
+      notify(error.message || 'Không tải được dữ liệu quản trị.');
+    }
   }
+
   document.getElementById('book-search').oninput = render;
   document.getElementById('user-search').oninput = render;
   document.getElementById('borrow-status-filter').onchange = render;
   document.addEventListener('click', async event => {
-    const bookId = event.target.dataset.book, userId = event.target.dataset.user;
+    const bookId = event.target.dataset.book;
+    const userId = event.target.dataset.user;
+    const requestedRole = event.target.dataset.role;
     try {
-      if (bookId && confirm('Xóa sách này?')) await SmartLibraryApi.delete(`/books/${bookId}`, { userId: user.id });
-      if (userId && confirm('Xóa người dùng này?')) await SmartLibraryApi.delete(`/users/${userId}`, { adminId: user.id });
-      if (bookId || userId) { notify('Đã xóa.'); load(); }
-    } catch (error) { notify(error.message || 'Không thể xóa.'); }
+      if (bookId && confirm('Xóa sách này?')) {
+        await SmartLibraryApi.delete(`/books/${bookId}`, { userId: user.id });
+      }
+      if (requestedRole && userId && confirm(requestedRole === 'LIBRARIAN' ? 'Cấp quyền thủ thư?' : 'Thu hồi quyền thủ thư?')) {
+        await SmartLibraryApi.patch(`/users/${userId}/role`, { adminId: user.id, roleName: requestedRole });
+      }
+      if (userId && !requestedRole && confirm('Xóa người dùng này?')) {
+        await SmartLibraryApi.delete(`/users/${userId}`, { adminId: user.id });
+      }
+      if (bookId || userId) {
+        notify(requestedRole ? 'Đã cập nhật quyền.' : 'Đã xóa.');
+        load();
+      }
+    } catch (error) {
+      notify(error.message || 'Không thể thực hiện thao tác.');
+    }
   });
   load();
 })();

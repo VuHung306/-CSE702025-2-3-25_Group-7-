@@ -3,6 +3,7 @@ package com.library.library_management.controller;
 import com.library.library_management.dto.request.UserDeleteRequest;
 import com.library.library_management.dto.request.UserLoginRequest;
 import com.library.library_management.dto.request.UserRegisterRequest;
+import com.library.library_management.dto.request.UserRoleUpdateRequest;
 import com.library.library_management.entity.User;
 import com.library.library_management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,11 @@ public class UserController {
                              @RequestBody UserDeleteRequest request) {
         userService.deleteUser(userId, request.getAdminId());
         return "User deleted";
+    }
+
+    @PatchMapping("/{userId}/role")
+    public User updateRole(@PathVariable String userId,
+                           @RequestBody UserRoleUpdateRequest request) {
+        return userService.updateRole(userId, request.getAdminId(), request.getRoleName());
     }
 }
