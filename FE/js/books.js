@@ -54,7 +54,12 @@
         SmartLibraryApi.get('/books/'), SmartLibraryApi.get('/types/')
       ]);
       books = loadedBooks;
-      const visibleTypes = types.filter(type => !hiddenCategoryNames.has(type.name));
+      const usedTypeIds = new Set(
+        loadedBooks.flatMap(book => (book.types || []).map(type => type.id))
+      );
+      const visibleTypes = types.filter(type =>
+        !hiddenCategoryNames.has(type.name) && usedTypeIds.has(type.id)
+      );
       category.innerHTML = '<option value="all">Tất cả thể loại</option>' + visibleTypes.map(type => `<option value="${type.id}">${type.name}</option>`).join('');
       const categoryFromUrl = new URLSearchParams(window.location.search).get('category');
       const matchingType = visibleTypes.find(type => type.name === categoryFromUrl);

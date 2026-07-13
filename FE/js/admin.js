@@ -6,7 +6,7 @@
   const toast = document.getElementById('toast');
   const isAdmin = user?.role?.name === 'ADMIN';
   const isLibrarian = user?.role?.name?.toUpperCase() === 'LIBRARIAN';
-  let books = [], users = [], borrows = [];
+  let books = [], users = [], borrows = [], types = [];
 
   const notify = message => {
     toast.textContent = message;
@@ -34,6 +34,10 @@
         <label>Ngày phát hành<input name="release_day" type="date" required></label>
         <label>ISBN<input name="isbn"></label>
         <label>Nhà xuất bản<input name="publisher"></label>
+        <label>Thể loại sách
+          <select id="book-type-ids" name="typeIds"></select>
+        </label>
+        <label>Thêm thể loại mới (không bắt buộc)<input name="newType" placeholder="Ví dụ: Truyện tranh"></label>
         <p class="form-error" id="add-book-error"></p>
         <div class="modal-actions">
           <button type="button" class="modal-cancel-btn">Hủy</button>
@@ -43,18 +47,36 @@
     </div>`;
   document.body.appendChild(addModal);
   const addForm = addModal.querySelector('#add-book-form');
+  const typeSelect = addModal.querySelector('#book-type-ids');
+  const hiddenTypeNames = new Set(['Technology', 'Literature', 'Economics', 'Foreign Languages', 'Science', 'Life Skills']);
+  const renderTypeOptions = () => {
+    const visibleTypes = types.filter(type => !hiddenTypeNames.has(type.name));
+    typeSelect.innerHTML = '<option value="" selected disabled>-- Chọn thể loại --</option>'
+      + visibleTypes.map(type => `<option value="${type.id}">${type.name}</option>`).join('');
+  };
   const closeAddModal = () => { addModal.style.display = 'none'; addForm.reset(); };
-  addButton.onclick = () => { addModal.style.display = 'grid'; };
+  addButton.onclick = () => { renderTypeOptions(); addModal.style.display = 'grid'; };
   addModal.querySelector('.modal-cancel-btn').onclick = closeAddModal;
   addModal.onclick = event => { if (event.target === addModal) closeAddModal(); };
   addForm.onsubmit = async event => {
     event.preventDefault();
     const values = Object.fromEntries(new FormData(addForm));
     try {
+      const typeIds = typeSelect.value ? [Number(typeSelect.value)] : [];
+      const newTypeName = values.newType?.trim();
+      if (newTypeName) {
+        const newType = await SmartLibraryApi.post('/types', { userId: user.id, name: newTypeName });
+        typeIds.push(newType.id);
+        types.push(newType);
+      }
+      if (!typeIds.length) {
+        throw new Error('Vui lòng chọn hoặc thêm ít nhất một thể loại.');
+      }
       await SmartLibraryApi.post('/books', {
         userId: user.id,
         name: values.name.trim(), author: values.author.trim(), release_day: values.release_day,
-        isbn: values.isbn.trim() || null, publisher: values.publisher.trim() || null, status: true
+        isbn: values.isbn.trim() || null, publisher: values.publisher.trim() || null,
+        status: true, typeIds
       });
       closeAddModal();
       notify('Đã thêm sách mới.');
@@ -107,10 +129,11 @@
       return;
     }
     try {
-      [books, users, borrows] = await Promise.all([
+      [books, users, borrows, types] = await Promise.all([
         SmartLibraryApi.get('/books/'),
         SmartLibraryApi.get(`/users/?adminId=${encodeURIComponent(user.id)}`),
-        SmartLibraryApi.get('/borrows/')
+        SmartLibraryApi.get('/borrows/'),
+        SmartLibraryApi.get('/types/')
       ]);
       render();
     } catch (error) {

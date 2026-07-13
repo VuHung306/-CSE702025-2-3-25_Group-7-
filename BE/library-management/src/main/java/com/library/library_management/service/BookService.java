@@ -116,5 +116,8 @@ public class BookService implements IBookService{
         borrowRepository.deleteByBookId(bookId);
         bookRepository.deleteTypeLinksByBookId(bookId);
         bookRepository.delete(book);
+        // A category created only for this book should not remain in the
+        // category dropdown after the book is deleted.
+        typeRepository.deleteUnusedTypes();
     }
 }

@@ -226,6 +226,8 @@
 
 .modal-card {
   width: min(420px, 100%);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
   background: var(--white);
   border-radius: 20px;
   padding: 1.2rem;
@@ -254,6 +256,15 @@
   border: 1px solid var(--border-color);
   border-radius: 10px;
   font: inherit;
+}
+
+.book-form select {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font: inherit;
+  background: var(--white);
 }
 
 .form-error {
