@@ -8,6 +8,8 @@ public class BookUpdateRequest {
     private Boolean status;
     private String isbn;
     private String publisher;
+    private String image;
+    private String description;
 
     public String getUserId() {
         return userId;
@@ -55,5 +57,21 @@ public class BookUpdateRequest {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

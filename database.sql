@@ -12,7 +12,9 @@ CREATE TABLE book (
     release_day DATE NOT NULL,
     status BOOLEAN DEFAULT TRUE,
     isbn VARCHAR(45) UNIQUE,
-    publisher VARCHAR(255)
+    publisher VARCHAR(255),
+    image LONGTEXT,
+    description TEXT
 );
 
 CREATE TABLE type (

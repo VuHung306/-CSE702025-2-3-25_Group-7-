@@ -11,6 +11,17 @@
   box-shadow: 0 10px 25px rgba(15, 92, 102, 0.08);
 }
 
+/* Let uploaded covers keep their own proportions instead of cropping them
+   into the fixed placeholder frame. */
+.books-page img.book-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
+  background: #f4f6f2;
+}
+
 .book-info {
   display: flex;
   flex-direction: column;

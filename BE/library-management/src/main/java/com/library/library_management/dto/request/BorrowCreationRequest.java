@@ -4,6 +4,7 @@ public class BorrowCreationRequest {
     private String userId;
     private Integer bookId;
     private Integer quantity;
+    private String borrowDate;
     private String dueDate;
 
     public String getUserId() {
@@ -28,6 +29,14 @@ public class BorrowCreationRequest {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getBorrowDate() {
+        return borrowDate;
+    }
+
+    public void setBorrowDate(String borrowDate) {
+        this.borrowDate = borrowDate;
     }
 
     public String getDueDate() {

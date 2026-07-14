@@ -92,8 +92,6 @@ public class UserService implements IUserService{
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // The borrow table references user_id. Remove those records first so
-        // the database foreign-key constraint does not block account deletion.
         List<Borrow> borrows = borrowRepository.findByUserId(userId);
         borrows.stream()
                 .filter(borrow -> !Boolean.TRUE.equals(borrow.getStatus()))

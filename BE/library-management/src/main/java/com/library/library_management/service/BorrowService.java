@@ -8,7 +8,9 @@ import com.library.library_management.repository.BookRepository;
 import com.library.library_management.repository.BorrowRepository;
 import com.library.library_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -37,17 +39,25 @@ public class BorrowService {
         Book book = bookRepository.findById(request.getBookId())
                 .orElseThrow(() -> new RuntimeException("Book not found"));
 
+        LocalDateTime borrowDate = LocalDateTime.parse(request.getBorrowDate());
+        LocalDateTime dueDate = LocalDateTime.parse(request.getDueDate());
+        long loanDays = ChronoUnit.DAYS.between(borrowDate.toLocalDate(), dueDate.toLocalDate());
+        if (borrowDate.toLocalDate().isBefore(java.time.LocalDate.now())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Borrow date cannot be in the past");
+        }
+        if (loanDays < 1 || loanDays > 30) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Return date must be from 1 to 30 days after the borrow date");
+        }
+
         Borrow borrow = new Borrow();
         borrow.setUser(user);
         borrow.setBook(book);
         borrow.setQuantity(request.getQuantity());
-        borrow.setBorrowtime(LocalDateTime.now());
-        borrow.setDuedate(LocalDateTime.parse(request.getDueDate()));
+        borrow.setBorrowtime(borrowDate);
+        borrow.setDuedate(dueDate);
         borrow.setReturntime(null);
         borrow.setFineamount(BigDecimal.ZERO);
         borrow.setStatus(false);
-
-        // Book.status represents availability in the current schema.
         book.setStatus(false);
         bookRepository.save(book);
 

@@ -11,6 +11,8 @@ public class BookCreationRequest {
     private Boolean status;
     private String isbn;
     private String publisher;
+    private String image;
+    private String description;
     private List<Integer> typeIds;
 
     public String getUserId() {
@@ -67,6 +69,22 @@ public class BookCreationRequest {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Integer> getTypeIds() {

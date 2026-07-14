@@ -14,6 +14,16 @@
     setTimeout(() => toast.classList.remove('show'), 2000);
   };
   const fullName = item => `${item.firstname || ''} ${item.lastname || ''}`.trim() || item.username;
+  const imageFromInput = input => new Promise((resolve, reject) => {
+    const file = input.files[0];
+    if (!file) return resolve(null);
+    if (!file.type.startsWith('image/')) return reject(new Error('Vui lòng chọn tệp ảnh.'));
+    if (file.size > 1024 * 1024) return reject(new Error('Ảnh phải có dung lượng không quá 1 MB.'));
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error('Không thể đọc tệp ảnh.'));
+    reader.readAsDataURL(file);
+  });
 
   const booksHeading = document.querySelector('#books-section .section-heading');
   const addButton = document.createElement('button');
@@ -34,10 +44,12 @@
         <label>Ngày phát hành<input name="release_day" type="date" required></label>
         <label>ISBN<input name="isbn"></label>
         <label>Nhà xuất bản<input name="publisher"></label>
+        <label>Mô tả sách<textarea name="description" rows="4" placeholder="Nhập mô tả ngắn về sách"></textarea></label>
+        <label>Ảnh bìa<input name="imageFile" type="file" accept="image/*"></label>
         <label>Thể loại sách
           <select id="book-type-ids" name="typeIds"></select>
         </label>
-        <label>Thêm thể loại mới (không bắt buộc)<input name="newType" placeholder="Ví dụ: Truyện tranh"></label>
+        <label>Thêm thể loại mới <input name="newType" placeholder="Ví dụ: Truyện tranh"></label>
         <p class="form-error" id="add-book-error"></p>
         <div class="modal-actions">
           <button type="button" class="modal-cancel-btn">Hủy</button>
@@ -62,6 +74,7 @@
     event.preventDefault();
     const values = Object.fromEntries(new FormData(addForm));
     try {
+      const image = await imageFromInput(addForm.elements.imageFile);
       const typeIds = typeSelect.value ? [Number(typeSelect.value)] : [];
       const newTypeName = values.newType?.trim();
       if (newTypeName) {
@@ -76,7 +89,7 @@
         userId: user.id,
         name: values.name.trim(), author: values.author.trim(), release_day: values.release_day,
         isbn: values.isbn.trim() || null, publisher: values.publisher.trim() || null,
-        status: true, typeIds
+        status: true, typeIds, image, description: values.description.trim() || null
       });
       closeAddModal();
       notify('Đã thêm sách mới.');
@@ -86,11 +99,64 @@
     }
   };
 
+  const editModal = document.createElement('div');
+  editModal.className = 'modal-backdrop';
+  editModal.style.display = 'none';
+  editModal.innerHTML = `
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <h3>Sửa sách</h3>
+      <form id="edit-book-form" class="book-form">
+        <label>Ảnh bìa mới<input name="imageFile" type="file" accept="image/*"></label>
+        <label>Mô tả sách<textarea name="description" rows="4" placeholder="Nhập mô tả về sách"></textarea></label>
+        <p class="form-error" id="edit-book-error"></p>
+        <div class="modal-actions">
+          <button type="button" class="modal-cancel-btn">Hủy</button>
+          <button type="submit" class="modal-submit-btn">Lưu thay đổi</button>
+        </div>
+      </form>
+    </div>`;
+  document.body.appendChild(editModal);
+  const editForm = editModal.querySelector('#edit-book-form');
+  const closeEditModal = () => { editModal.style.display = 'none'; editForm.reset(); delete editModal.dataset.bookId; };
+  editModal.querySelector('.modal-cancel-btn').onclick = closeEditModal;
+  editModal.onclick = event => { if (event.target === editModal) closeEditModal(); };
+  const openEditModal = book => {
+    editModal.dataset.bookId = book.id;
+    editForm.elements.description.value = book.description || '';
+    editModal.style.display = 'grid';
+  };
+  editForm.onsubmit = async event => {
+    event.preventDefault();
+    const book = books.find(item => String(item.id) === editModal.dataset.bookId);
+    try {
+      const image = await imageFromInput(editForm.elements.imageFile);
+      const description = editForm.elements.description.value.trim();
+      await SmartLibraryApi.put(`/books/${book.id}`, {
+        userId: user.id,
+        author: book.author,
+        release_day: book.release_day,
+        status: book.status,
+        isbn: book.isbn || null,
+        publisher: book.publisher || null,
+        image,
+        description
+      });
+      closeEditModal();
+      notify('Đã cập nhật sách.');
+      load();
+    } catch (error) {
+      editModal.querySelector('#edit-book-error').textContent = error.message || 'Không thể cập nhật sách.';
+    }
+  };
+
   const render = () => {
     const keyword = document.getElementById('book-search').value.toLowerCase();
     booksBody.innerHTML = '';
     books.filter(book => `${book.name} ${book.author}`.toLowerCase().includes(keyword)).forEach(book => {
-      booksBody.innerHTML += `<tr><td><div class="book-cover"></div></td><td>${book.name}</td><td>${book.author}</td><td>${book.publisher || '-'}</td><td>-</td><td>${book.status ? 'Có sẵn' : 'Đang mượn'}</td><td><button class="action-btn delete" data-book="${book.id}">Xóa</button></td></tr>`;
+      const cover = book.image ? `<img class="book-cover book-cover-image" src="${book.image}" alt="Bìa ${book.name}">` : '<div class="book-cover"></div>';
+      const typeNames = (book.types || []).map(type => type.name).join(', ') || '-';
+      const releaseDate = book.release_day ? new Date(`${book.release_day}T00:00:00`).toLocaleDateString('vi-VN') : '-';
+      booksBody.innerHTML += `<tr><td>${cover}</td><td>${book.name}</td><td>${book.author}</td><td>${releaseDate}</td><td>${book.isbn || '-'}</td><td>${book.publisher || '-'}</td><td>${typeNames}</td><td>${book.status ? 'Có sẵn' : 'Đang mượn'}</td><td><button class="action-btn edit" data-edit-book="${book.id}">Sửa sách</button><button class="action-btn delete" data-book="${book.id}">Xóa</button></td></tr>`;
     });
 
     const userKeyword = document.getElementById('user-search').value.toLowerCase();
@@ -146,8 +212,14 @@
   document.getElementById('borrow-status-filter').onchange = render;
   document.addEventListener('click', async event => {
     const bookId = event.target.dataset.book;
+    const editBookId = event.target.dataset.editBook;
     const userId = event.target.dataset.user;
     const requestedRole = event.target.dataset.role;
+    if (editBookId) {
+      const book = books.find(item => String(item.id) === editBookId);
+      if (book) openEditModal(book);
+      return;
+    }
     try {
       if (bookId && confirm('Xóa sách này?')) {
         await SmartLibraryApi.delete(`/books/${bookId}`, { userId: user.id });

@@ -170,6 +170,11 @@
   background: linear-gradient(135deg, var(--accent-color), #b8ddd6);
 }
 
+.book-cover-image {
+  display: block;
+  object-fit: cover;
+}
+
 .badge {
   display: inline-block;
   padding: 0.25rem 0.6rem;
@@ -256,6 +261,15 @@
   border: 1px solid var(--border-color);
   border-radius: 10px;
   font: inherit;
+}
+
+.book-form textarea {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font: inherit;
+  resize: vertical;
 }
 
 .book-form select {

@@ -36,7 +36,7 @@
         window.location.href = isStaff ? 'admin.html' : 'profile.html';
       }, 500);
     } catch (error) {
-      message.textContent = error.message || 'Không thể đăng nhập. Hãy kiểm tra backend.';
+      message.textContent = 'Tài khoản hoặc mật khẩu không chính xác, vui lòng nhập lại.';
       message.style.color = '#dc2626';
     }
   });

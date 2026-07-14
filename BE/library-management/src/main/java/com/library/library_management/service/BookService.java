@@ -73,6 +73,8 @@ public class BookService implements IBookService{
         String publisher = request.getPublisher();
 
         Book book = new Book(name, author, release_day, status, isbn, publisher);
+        book.setImage(request.getImage());
+        book.setDescription(request.getDescription());
 
         if (request.getTypeIds() != null && !request.getTypeIds().isEmpty()) {
             List<Type> types = typeRepository.findAllById(request.getTypeIds());
@@ -100,6 +102,12 @@ public class BookService implements IBookService{
         book.setStatus(request.getStatus());
         book.setIsbn(request.getIsbn());
         book.setPublisher(request.getPublisher());
+        if (request.getImage() != null) {
+            book.setImage(request.getImage());
+        }
+        if (request.getDescription() != null) {
+            book.setDescription(request.getDescription());
+        }
 
         return bookRepository.save(book);
     }
@@ -111,13 +119,9 @@ public class BookService implements IBookService{
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Book not found"));
-        // Remove dependent rows first so MySQL foreign-key constraints do not
-        // block deletion of a book that has categories or borrow records.
         borrowRepository.deleteByBookId(bookId);
         bookRepository.deleteTypeLinksByBookId(bookId);
         bookRepository.delete(book);
-        // A category created only for this book should not remain in the
-        // category dropdown after the book is deleted.
         typeRepository.deleteUnusedTypes();
     }
 }
